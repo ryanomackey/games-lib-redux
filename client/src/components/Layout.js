@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Nav from './Navbar';
 import Login from './Login';
+import Library from './Library';
 
 @connect((store) => {
   return {
@@ -19,6 +20,7 @@ export default class Layout extends React.Component {
       <div>
         <Nav />
         <Login/>
+        <Library />
       </div>
     )
   }
