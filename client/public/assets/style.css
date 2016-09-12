@@ -37,16 +37,17 @@
 }
 
 .card {
-  min-height: 400px;
+  height: 500px;
 }
 
 .card-image {
-  height:75%;
+  height:400px;
   overflow-y: hidden;
+  background-color: #263238;
 }
 
 .card-content {
-  height:25%;
+  height:100px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;

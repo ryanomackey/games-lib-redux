@@ -23,3 +23,18 @@ export function giantBombSearch(searchQuery) {
     });
   };
 }
+
+export function addToLibrary(game) {
+  return function(dispatch) {
+    dispatch({type: 'LIBRARY_OPTIMISTIC', payload: game});
+  };
+  // return function(dispatch) {
+  //   axios.post('http://localhost:3000/games/', game)
+  //   .then(function(response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function(err) {
+  //     console.log(err);
+  //   });
+  // };
+}
