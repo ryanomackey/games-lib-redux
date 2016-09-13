@@ -27,10 +27,20 @@ export default function reducer(state=initialState, action) {
         searching: false
       });
     }
+    case "LIBRARY_FETCH_SUCCESS": {
+      return Object.assign({}, state, {
+        library: action.payload
+      });
+    }
     case "LIBRARY_OPTIMISTIC": {
       return Object.assign({}, state, {
         showGameSearch: false,
         library: [...state.library, action.payload]
+      });
+    }
+    case "LOGOUT": {
+      return Object.assign({}, state, {
+        library: []
       });
     }
     default: {

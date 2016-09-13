@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import AddGame from './AddGame';
 import {toggleGameSearch} from '../actions/libraryActions';
 import LibraryGame from './LibraryGame';
-import {getLibrary} from '../actions/libraryActions';
 
 @connect((store) => {
   return {
@@ -17,10 +16,6 @@ import {getLibrary} from '../actions/libraryActions';
 export default class Library extends React.Component {
   toggleGameSearch() {
     this.props.dispatch(toggleGameSearch());
-  }
-
-  componentWillMount() {
-    this.props.dispatch(getLibrary());
   }
 
   render() {

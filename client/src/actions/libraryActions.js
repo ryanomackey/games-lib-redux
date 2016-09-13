@@ -33,15 +33,14 @@ export function giantBombSearch(searchQuery) {
 }
 
 export function addToLibrary(game) {
-  console.log(game);
   return function(dispatch) {
     dispatch({type: 'LIBRARY_OPTIMISTIC', payload: game});
     instance.post('games', game)
     .then(function(response) {
-      console.log(response);
+      dispatch({type: 'LIBRARY_POST_SUCCESS'});
     })
     .catch(function(err) {
-      console.log(err);
+      dispatch({type: 'LIBRARY_POST_ERROR', payload: err});
     });
   };
 }
@@ -51,10 +50,10 @@ export function getLibrary() {
     dispatch({type: 'LIBRARY_FETCHING'});
     instance.get('/games')
     .then(function(response) {
-      console.log(response.data);
+      dispatch({type: 'LIBRARY_FETCH_SUCCESS', payload: response.data});
     })
     .catch(function(err) {
-      console.log(err);
+      dispatch({type:'LIBRARY_FETCH_ERROR', payload: err});
     });
   };
 }

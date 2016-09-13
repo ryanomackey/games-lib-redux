@@ -6,6 +6,7 @@ import Nav from './Navbar';
 import Login from './Login';
 import Library from './Library';
 import Footer from './Footer';
+import {getLibrary} from '../actions/libraryActions';
 
 @connect((store) => {
   return {
@@ -15,6 +16,9 @@ import Footer from './Footer';
 })
 
 export default class Layout extends React.Component {
+  componentWillMount() {
+    this.props.dispatch(getLibrary());
+  }
   render () {
     const {user, library} = this.props;
     return (

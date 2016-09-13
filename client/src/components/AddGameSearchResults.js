@@ -17,7 +17,6 @@ export default class AddGameSearchResults extends React.Component {
   }
 
   addToLibrary(searchResult, image_url, platform) {
-    event.preventDefault();
     const game = {
       game_id: searchResult.id,
       game_name: searchResult.name,
@@ -46,7 +45,7 @@ export default class AddGameSearchResults extends React.Component {
             platforms = [{id:0, name:'N/A'}];
           }
           return (
-            <div className="col s12 m6 l4" style={{height:'500px',marginTop:'1%',marginBottom:'1%'}} key={searchResult.id}>
+            <div className="col s12 m4 l3" style={{height:'500px',marginTop:'1%',marginBottom:'1%'}} key={searchResult.id}>
               <div className="card search-result">
                 <div className="card-image waves-effect waves-block waves-light" style={{display:'flex',alignItems:'center'}}>
                   <img className="activator" src={image_url}/>
@@ -60,9 +59,11 @@ export default class AddGameSearchResults extends React.Component {
                   <h5>Select a platform:</h5>
                   {platforms.map((platform) => {
                     return (
-                      <form key={platform.id} onSubmit={this.addToLibrary.bind(this, searchResult, image_url, platform)}>
-                        <button value={platform.name} className="waves-effect waves-light btn right" style={{margin:'0 0 1% 1%'}}>{platform.name}</button>
-                      </form>
+                      <a className="waves-effect waves-light btn right"
+                        style={{margin:'0 0 1% 1%'}}
+                        key={platform.id}
+                        onClick={this.addToLibrary.bind(this, searchResult, image_url, platform)}
+                        >{platform.name}</a>
                     )
                   })}
                 </div>

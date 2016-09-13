@@ -6,8 +6,9 @@ var knex = require('../db/knex');
 
 router.get('/', function(req, res) {
   knex('user_games').where({user_id:req.user.id})
-  .leftJoin('games','game_id','games.giantbomb_id').column('games.name AS game_name','image_url','deck','games.giantbomb_id')
-  .leftJoin('platforms','platform_id','platforms.giantbomb_id').column('platforms.name AS platform_name')
+  .leftJoin('games','game_id','games.giantbomb_id').column('games.name AS game_name','image_url AS game_image','deck AS game_deck','games.giantbomb_id AS game_id')
+  .leftJoin('platforms','platform_id','platforms.giantbomb_id').column('platforms.name AS platform_name', 'platforms.giantbomb_id AS platform_id')
+  .orderBy('game_name','ASC')
   .then(function(data) {
     res.json(data);
   })

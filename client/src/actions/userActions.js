@@ -2,9 +2,16 @@
 
 import axios from 'axios';
 
+const bearerToken = sessionStorage.getItem('token');
+
+const instance = axios.create({
+  baseURL: 'http://localhost:3000/',
+  headers: {'Authorization': 'Bearer ' + bearerToken}
+});
+
 export function login(email, password) {
   return function(dispatch) {
-    axios.post('http://localhost:3000/authenticate/login', {
+    instance.post('http://localhost:3000/authenticate/login', {
       email: email,
       password: password
     })
@@ -12,6 +19,7 @@ export function login(email, password) {
       if (response.data.token) {
         sessionStorage.setItem('token',response.data.token);
         dispatch({type: 'LOGIN_SUCCESS', payload: response.data});
+        fetchLibrary(dispatch);
       } else {
         dispatch({type: 'LOGIN_FAILURE', payload: response.data});
       }
@@ -27,4 +35,14 @@ export function logout() {
     sessionStorage.removeItem('token');
     dispatch({type: 'LOGOUT'});
   };
+}
+
+function fetchLibrary(dispatch) {
+  instance.get('/games')
+  .then(function(response) {
+    dispatch({type: 'LIBRARY_FETCH_SUCCESS', payload: response.data});
+  })
+  .catch(function(err) {
+    dispatch({type:'LIBRARY_FETCH_ERROR', payload: err});
+  });
 }
