@@ -2,6 +2,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('platforms', function(table) {
     table.increments();
+    table.integer('giantbomb_id');
     table.string('name');
   });
 };

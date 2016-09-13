@@ -27,7 +27,7 @@ router.post('/login', function(req, res) {
     bcrypt.compare(req.body.password, data[0].password, function(err, success) {
       if (success) {
         var profile = {
-          _id: data[0]._id,
+          id: data[0].id,
           email: data[0].email
         };
         var token = jwt.sign(profile, process.env.SECRET);

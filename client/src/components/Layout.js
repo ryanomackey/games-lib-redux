@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Nav from './Navbar';
 import Login from './Login';
 import Library from './Library';
+import Footer from './Footer';
 
 @connect((store) => {
   return {

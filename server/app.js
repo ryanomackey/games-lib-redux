@@ -7,6 +7,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var expressJwt = require('express-jwt');
 
 var authenticate = require('./routes/authenticate');
 var api = require('./routes/api');
@@ -27,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/authenticate', authenticate);
-app.use('/api', api);
-app.use('/games', games);
+app.use('/api', expressJwt({secret:process.env.SECRET}), api);
+app.use('/games', expressJwt({secret:process.env.SECRET}), games);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

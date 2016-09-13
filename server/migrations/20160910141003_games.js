@@ -6,7 +6,7 @@ exports.up = function(knex) {
     table.integer('giantbomb_id');
     table.string('name');
     table.string('image_url');
-    table.string('deck');
+    table.text('deck');
   });
 };
 
