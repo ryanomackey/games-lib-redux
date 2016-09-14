@@ -18,7 +18,7 @@ export default class Logout extends React.Component {
     const {user} = this.props;
     if (user.login) {
       return (
-        <li><a className="waves-effect waves-light btn" onClick={this.logout.bind(this)}>Logout</a></li>
+        <li><a className="waves-effect waves-light btn" onClick={this.logout.bind(this)}>Log out</a></li>
       )
     } else {
       return null;

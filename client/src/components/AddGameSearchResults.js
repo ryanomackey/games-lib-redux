@@ -54,7 +54,7 @@ export default class AddGameSearchResults extends React.Component {
                   <span className="card-title activator grey-text text-darken-4">{searchResult.name}</span>
                 </div>
                 <div className="card-reveal">
-                  <span className="card-title grey-text text-darken-4">{searchResult.name}<i className="material-icons right">close</i></span>
+                  <span className="card-title grey-text text-darken-4"><i className="material-icons right">close</i>{searchResult.name}</span>
                   <p>{searchResult.deck}</p>
                   <h5>Select a platform:</h5>
                   {platforms.map((platform) => {

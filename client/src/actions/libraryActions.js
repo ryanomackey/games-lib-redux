@@ -36,7 +36,7 @@ export function addToLibrary(game) {
   return function(dispatch) {
     dispatch({type: 'LIBRARY_OPTIMISTIC', payload: game});
     instance.post('games', game)
-    .then(function(response) {
+    .then(function() {
       dispatch({type: 'LIBRARY_POST_SUCCESS'});
     })
     .catch(function(err) {
@@ -55,5 +55,23 @@ export function getLibrary() {
     .catch(function(err) {
       dispatch({type:'LIBRARY_FETCH_ERROR', payload: err});
     });
+  };
+}
+
+export function toggleLibraryOrder() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_LIBRARY_ORDER'});
+  };
+}
+
+export function togglePlatformDropdown() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_PLATFORM_DROPDOWN'});
+  };
+}
+
+export function togglePlatform(platform) {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_PLATFORM', payload:platform});
   };
 }

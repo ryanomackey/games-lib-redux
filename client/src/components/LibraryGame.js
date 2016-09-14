@@ -13,6 +13,31 @@ import {connect} from 'react-redux';
 export default class LibraryGame extends React.Component {
   render() {
     const { library} = this.props;
+    library.library.sort(function(a,b) {
+      if (library.libraryOrder === 'ASC') {
+        var nameA = a.game_name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.game_name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      } else {
+        var nameA = a.game_name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.game_name.toUpperCase(); // ignore upper and lowercase
+        if (nameA > nameB) {
+          return -1;
+        }
+        if (nameA < nameB) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      }
+    });
     return (
       <div className="row">
       {library.library.map((game) => {
@@ -26,7 +51,7 @@ export default class LibraryGame extends React.Component {
                 <span className="card-title activator grey-text text-darken-4">{game.game_name}</span>
               </div>
               <div className="card-reveal">
-                <span className="card-title grey-text text-darken-4">{game.game_name}<i className="material-icons right">close</i></span>
+                <span className="card-title grey-text text-darken-4"><i className="material-icons right">close</i>{game.game_name}</span>
                 <p>{game.game_deck}</p>
               </div>
             </div>

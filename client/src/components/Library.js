@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import AddGame from './AddGame';
 import {toggleGameSearch} from '../actions/libraryActions';
 import LibraryGame from './LibraryGame';
+import FilterBar from './FilterBar';
 
 @connect((store) => {
   return {
@@ -40,6 +41,8 @@ export default class Library extends React.Component {
               </div>
             </div>
             <AddGame />
+            <FilterBar />
+            <hr/>
             <LibraryGame />
           </div>
         </main>
