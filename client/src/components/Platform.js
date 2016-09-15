@@ -11,9 +11,11 @@ import {togglePlatform} from '../actions/libraryActions';
 })
 
 export default class Platform extends React.Component {
+
   togglePlatform(event) {
     this.props.dispatch(togglePlatform(event.target.id));
   }
+
   render() {
     const {library} = this.props;
     if (library.platformDropdown) {

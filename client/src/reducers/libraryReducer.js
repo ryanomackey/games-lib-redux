@@ -9,7 +9,10 @@ const initialState = {
   platforms: [],
   platformArrow: 'arrow_drop_down',
   platformDropdown: false,
-  platformArray: []
+  platformArray: [],
+  gameModalShow: false,
+  gameModalContent: {},
+  streams: []
 };
 
 export default function reducer(state=initialState, action) {
@@ -27,6 +30,7 @@ export default function reducer(state=initialState, action) {
       });
     }
     case "SEARCH_SUCCESS": {
+      console.log(action.payload.results);
       return Object.assign({}, state, {
         searchResults: action.payload.results,
         searching: false
@@ -64,6 +68,24 @@ export default function reducer(state=initialState, action) {
       return Object.assign({}, state, {
         platformArray: arrayToggle(state.platformArray, action.payload),
         library: filter(state.library, state.platformArray)
+      });
+    }
+    case "OPEN_GAME_MODAL": {
+      return Object.assign({}, state, {
+        gameModalShow: state.gameModalShow = !state.gameModalShow,
+        gameModalContent: action.payload
+      });
+    }
+    case "CLOSE_GAME_MODAL": {
+      return Object.assign({}, state, {
+        gameModalShow: state.gameModalShow = !state.gameModalShow,
+        gameModalContent: {},
+        streams: {}
+      });
+    }
+    case "STREAM_FETCH_SUCCESS": {
+      return Object.assign({}, state, {
+        streams: action.payload
       });
     }
     default: {

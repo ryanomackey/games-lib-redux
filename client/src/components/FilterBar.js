@@ -25,12 +25,22 @@ export default class FilterBar extends React.Component {
     const {library} = this.props;
     return (
       <div className="row">
-        <div className="col s3">
+        <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
           <a onClick={this.toggleLibraryOrder.bind(this)} className="btn btn-large btn-block">
             <i className="material-icons right">sort_by_alpha</i>Title:
           </a>
         </div>
-        <div className="col s3">
+        <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
+          <a className="btn btn-large btn-block">
+            <i className="material-icons right">history</i>Release:
+          </a>
+        </div>
+        <div className="col s6 m6 l3">
+          <a className="btn btn-large btn-block">
+            <i className="material-icons right">done</i>Complete:
+          </a>
+        </div>
+        <div className="col s6 m6 l3">
           <a onClick={this.togglePlatformDropdown.bind(this)} className="btn btn-large btn-block">
             <i className="material-icons right">{library.platformArrow}</i>Platform:
           </a>

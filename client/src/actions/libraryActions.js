@@ -75,3 +75,19 @@ export function togglePlatform(platform) {
     dispatch({type:'TOGGLE_PLATFORM', payload:platform});
   };
 }
+
+export function openGameModal(game) {
+  return function(dispatch) {
+    dispatch({type:'OPEN_GAME_MODAL', payload:game});
+    instance.get('/api/twitch?q=' + game.game_name)
+    .then(function(response) {
+      dispatch({type:'STREAM_FETCH_SUCCESS', payload:response.data.streams});
+    });
+  };
+}
+
+export function closeGameModal() {
+  return function(dispatch) {
+    dispatch({type:'CLOSE_GAME_MODAL'});
+  };
+}

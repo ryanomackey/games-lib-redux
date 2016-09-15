@@ -36,4 +36,38 @@ router.get('/search', function(req, res) {
 
 });
 
+router.get('/twitch', function(req, res) {
+
+  var query = encodeURI(req.query.q);
+
+  var path = '/kraken/search/streams?q=' + query;
+
+  var options = {
+    hostname: 'api.twitch.tv',
+    path: path,
+    method: 'GET',
+    headers: {
+      'Client-ID': process.env.TWITCH,
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.twitchtv.v3+json'
+    }
+  };
+
+  function callback(response) {
+    var str = '';
+
+    response.on('data', function (chunk) {
+      str += chunk;
+    });
+
+    response.on('end', function () {
+      var parsed = JSON.parse(str);
+      res.json(parsed);
+    });
+  }
+
+  http.request(options, callback).end();
+
+});
+
 module.exports = router;
