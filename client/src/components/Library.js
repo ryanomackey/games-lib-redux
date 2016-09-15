@@ -16,6 +16,7 @@ import GameModal from './GameModal';
 })
 
 export default class Library extends React.Component {
+
   toggleGameSearch() {
     this.props.dispatch(toggleGameSearch());
   }

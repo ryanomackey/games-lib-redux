@@ -3,6 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions/userActions';
+import { toggleCreateAccount} from '../actions/userActions';
+import CreateAccount from './CreateAccount';
 
 @connect((store) => {
   return {
@@ -17,6 +19,10 @@ export default class Login extends React.Component {
     const email = this._email.value;
     const password = this._password.value;
     this.props.dispatch(login(email, password));
+  }
+
+  toggleCreateAccount() {
+    this.props.dispatch(toggleCreateAccount());
   }
 
   render() {
@@ -50,6 +56,12 @@ export default class Login extends React.Component {
               </div>
             </form>
           </div>
+          <div className="row">
+            <div className="col s12">
+              <p>No account? <a href="#" onClick={this.toggleCreateAccount.bind(this)}>Sign up!</a></p>
+            </div>
+          </div>
+          <CreateAccount />
         </div>
       )
     } else {

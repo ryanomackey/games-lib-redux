@@ -46,3 +46,9 @@ function fetchLibrary(dispatch) {
     dispatch({type:'LIBRARY_FETCH_ERROR', payload: err});
   });
 }
+
+export function toggleCreateAccount() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_CREATE_ACCOUNT'});
+  }
+}

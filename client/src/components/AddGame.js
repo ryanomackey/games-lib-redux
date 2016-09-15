@@ -18,11 +18,17 @@ export default class AddGame extends React.Component {
   toggleGameSearch() {
     this.props.dispatch(toggleGameSearch());
   }
+  toggleGameSearchAlt(event) {
+    var modal = document.getElementById('modal');
+    if (modal == event.target) {
+      this.props.dispatch(toggleGameSearch());
+    }
+  }
   render() {
     const {user, library} = this.props;
     if (library.showGameSearch) {
       return (
-        <div className="add-game-modal">
+        <div className="add-game-modal" id="modal" onClick={this.toggleGameSearchAlt.bind(this)}>
           <div className="add-game-modal-content">
             <div style={{marginBottom:'5%'}}>
               <h4 style={{display:'inline'}}>Search titles to add to library</h4>

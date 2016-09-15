@@ -15,15 +15,21 @@ export default class GameModal extends React.Component {
   closeGameModal() {
     this.props.dispatch(closeGameModal());
   }
+  closeGameModalAlt(event) {
+    var modal = document.getElementById('modal');
+    if (event.target == modal) {
+      this.props.dispatch(closeGameModal());
+    }
+  }
   render() {
     const {library} = this.props;
     const fullScreen = true;
     if (library.gameModalShow) {
       return (
-        <div className="game-modal">
+        <div className="game-modal" id="modal" onClick={this.closeGameModalAlt.bind(this)}>
           <div className="game-modal-content">
             <div className="container-fluid">
-              <div className="row">
+              <div className="row game-modal-close">
                 <i className="material-icons right" style={{marginRight:'10px'}} onClick={this.closeGameModal.bind(this)}>close</i>
               </div>
               <div className="row">

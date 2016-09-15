@@ -1,7 +1,8 @@
 'use strict';
 
 const initialState = {
-  login: (sessionStorage.token)
+  login: (sessionStorage.token),
+  showCreateAccount: false
 };
 
 export default function reducer(state=initialState, action) {
@@ -14,6 +15,11 @@ export default function reducer(state=initialState, action) {
     case "LOGOUT": {
       return Object.assign({}, state, {
         login: false
+      });
+    }
+    case "TOGGLE_CREATE_ACCOUNT": {
+      return Object.assign({}, state, {
+        showCreateAccount: state.showCreateAccount = !state.showCreateAccount
       });
     }
     default: {

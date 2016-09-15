@@ -18,10 +18,9 @@ export default class Stream extends React.Component {
           {library.streams.map((stream) => {
             const src = 'http://player.twitch.tv/?channel=' + stream.channel.name + '&autoplay=false';
             return (
-              <div className="col s12 m12 l6" style={{marginBottom:'1%'}}>
+              <div className="col s12 m12 l6" style={{marginBottom:'1%'}} key={stream._id}>
                 <iframe
                     src={src}
-                    key={stream._id}
                     height="360"
                     width="100%"
                     frameBorder="0"

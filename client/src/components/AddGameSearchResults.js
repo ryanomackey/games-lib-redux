@@ -35,7 +35,8 @@ export default class AddGameSearchResults extends React.Component {
       <div className="row" style={{marginTop:'2%',height:'75%',overflow:'auto'}}>
         {library.searchResults.map((searchResult) => {
           if (searchResult.image) {
-            var image_url = 'http' + searchResult.image.small_url.substr(5);
+            // var image_url = 'http' + searchResult.image.small_url.substr(5);
+            var image_url = searchResult.image.small_url;
           } else {
             image_url = null;
           }
