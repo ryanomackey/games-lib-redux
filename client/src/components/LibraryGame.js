@@ -21,33 +21,31 @@ export default class LibraryGame extends React.Component {
   render() {
     const { library} = this.props;
     library.library.sort(function(a,b) {
-      if (library.libraryOrder === 'ASC') {
-        var nameA = a.game_name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.game_name.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        // names must be equal
+      var nameA = a.game_name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.game_name.toUpperCase(); // ignore upper and lowercase
+      var dateA = a.game_release_date;
+      var dateB = b.game_release_date;
+      if (library.libraryOrder === 'TITLE_ASC') {
+        if (nameA < nameB) {return -1;}
+        if (nameA > nameB) {return 1;}
         return 0;
-      } else {
-        var nameA = a.game_name.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.game_name.toUpperCase(); // ignore upper and lowercase
-        if (nameA > nameB) {
-          return -1;
-        }
-        if (nameA < nameB) {
-          return 1;
-        }
-        // names must be equal
+      } else if (library.libraryOrder === 'TITLE_DESC') {
+        if (nameA > nameB) {return -1;}
+        if (nameA < nameB) {return 1;}
+        return 0;
+      } else if (library.libraryOrder === 'RELEASE_ASC') {
+        if (dateA < dateB) {return -1;}
+        if (dateA > dateB) {return 1;}
+        return 0;
+      } else if (library.libraryOrder === 'RELEASE_DESC') {
+        if (dateA > dateB) {return -1;}
+        if (dateA < dateB) {return 1;}
         return 0;
       }
     });
     return (
       <div className="row">
-        <Stagger transition="fadeIn" initialDelay={200} delay={175}>
+        <Stagger transition="fadeIn" initialDelay={200} delay={150}>
           {library.library.map((game) => {
             {if (game.is_visible) {
               return (

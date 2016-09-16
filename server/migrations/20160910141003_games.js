@@ -7,6 +7,7 @@ exports.up = function(knex) {
     table.string('name');
     table.string('image_url');
     table.text('deck');
+    table.string('release_date');
   });
 };
 

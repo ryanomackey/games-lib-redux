@@ -2,13 +2,6 @@
 
 import axios from 'axios';
 
-const bearerToken = sessionStorage.getItem('token');
-
-const instance = axios.create({
-  baseURL: 'http://localhost:3000/',
-  headers: {'Authorization': 'Bearer ' + bearerToken}
-});
-
 export function toggleGameSearch() {
   return function(dispatch) {
     dispatch({type: 'TOGGLE_GAME_SEARCH'});
@@ -16,6 +9,11 @@ export function toggleGameSearch() {
 }
 
 export function giantBombSearch(searchQuery) {
+  const bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken}
+  });
   return function(dispatch) {
     dispatch({type: 'SEARCH_START'});
     instance.get('api/search?query=' + searchQuery)
@@ -33,6 +31,11 @@ export function giantBombSearch(searchQuery) {
 }
 
 export function addToLibrary(game) {
+  const bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken}
+  });
   return function(dispatch) {
     dispatch({type: 'LIBRARY_OPTIMISTIC', payload: game});
     instance.post('games', game)
@@ -46,6 +49,11 @@ export function addToLibrary(game) {
 }
 
 export function getLibrary() {
+  const bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken}
+  });
   return function(dispatch) {
     dispatch({type: 'LIBRARY_FETCHING'});
     instance.get('/games')
@@ -77,6 +85,11 @@ export function togglePlatform(platform) {
 }
 
 export function openGameModal(game) {
+  const bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken}
+  });
   return function(dispatch) {
     dispatch({type:'OPEN_GAME_MODAL', payload:game});
     instance.get('/api/twitch?q=' + game.game_name)
@@ -89,5 +102,11 @@ export function openGameModal(game) {
 export function closeGameModal() {
   return function(dispatch) {
     dispatch({type:'CLOSE_GAME_MODAL'});
+  };
+}
+
+export function toggleReleaseOrder() {
+  return function(dispatch) {
+    dispatch({type: 'TOGGLE_RELEASE_ORDER'});
   };
 }

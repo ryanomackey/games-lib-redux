@@ -22,6 +22,7 @@ export default class AddGameSearchResults extends React.Component {
       game_name: searchResult.name,
       game_deck: searchResult.deck,
       game_image: image_url,
+      game_release_date: searchResult.original_release_date,
       platform_id: platform.id,
       platform_name: platform.name
     }
@@ -30,7 +31,6 @@ export default class AddGameSearchResults extends React.Component {
 
   render() {
     const { library } = this.props;
-    // console.log(library.searchResults);
     return (
       <div className="row" style={{marginTop:'2%',height:'75%',overflow:'auto'}}>
         {library.searchResults.map((searchResult) => {

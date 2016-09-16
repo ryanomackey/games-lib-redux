@@ -21,18 +21,16 @@ export default class Platform extends React.Component {
     const {library} = this.props;
     if (library.platformDropdown) {
       return (
-        <ul>
-          <Stagger transition="fadeIn" delay={100}>
-            {library.platforms.map((platform, index) => {
-              return (
-                <p key={index} style={{paddingLeft:'5%'}}>
-                  <input type="checkbox" id={platform.name} defaultChecked={platform.selected} onClick={this.togglePlatform.bind(this)}/>
-                  <label htmlFor={platform.name}>{platform.name}</label>
-                </p>
-              )
-            })}
-          </Stagger>
-        </ul>
+        <Stagger transition="fadeIn" delay={75}>
+          {library.platforms.map((platform, index) => {
+            return (
+              <p key={index} style={{display:'inline-block',width:'150px',marginRight:'1%'}}>
+                <input type="checkbox" id={platform.name} defaultChecked={platform.selected} onClick={this.togglePlatform.bind(this)}/>
+                <label htmlFor={platform.name}>{platform.name}</label>
+              </p>
+            )
+          })}
+        </Stagger>
       )
     } else {
       return null;

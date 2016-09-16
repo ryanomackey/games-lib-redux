@@ -6,7 +6,7 @@ var knex = require('../db/knex');
 
 router.get('/', function(req, res) {
   knex('user_games').where({user_id:req.user.id})
-  .leftJoin('games','game_id','games.giantbomb_id').column('games.name AS game_name','image_url AS game_image','deck AS game_deck','games.giantbomb_id AS game_id')
+  .leftJoin('games','game_id','games.giantbomb_id').column('games.name AS game_name','image_url AS game_image','deck AS game_deck','games.giantbomb_id AS game_id','games.release_date AS game_release_date')
   .leftJoin('platforms','platform_id','platforms.giantbomb_id').column('platforms.name AS platform_name', 'platforms.giantbomb_id AS platform_id')
   .orderBy('game_name','ASC')
   .then(function(data) {
@@ -19,10 +19,11 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var game = req.body;
+  console.log(game);
   knex('games').where({giantbomb_id:game.game_id})
     .then(function(result) {
       if(!result.length) {
-        return knex('games').insert({giantbomb_id:game.game_id,name: game.game_name,image_url:game.game_image,deck:game.game_deck});
+        return knex('games').insert({giantbomb_id:game.game_id,name: game.game_name,image_url:game.game_image,deck:game.game_deck,release_date:game.game_release_date});
       }
     })
     .then(function() {

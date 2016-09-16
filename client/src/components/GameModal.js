@@ -3,7 +3,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {closeGameModal} from '../actions/libraryActions';
-import Stream from './Stream'
+import Stream from './Stream';
+import moment from 'moment';
 
 @connect((store) => {
   return {
@@ -23,6 +24,7 @@ export default class GameModal extends React.Component {
   }
   render() {
     const {library} = this.props;
+    const releaseDate = moment(library.gameModalContent.game_release_date).format('MMMM Do, YYYY');
     if (library.gameModalShow) {
       return (
         <div className="game-modal" id="modal" onClick={this.closeGameModalAlt.bind(this)}>
@@ -37,7 +39,7 @@ export default class GameModal extends React.Component {
                   <hr/>
                   <p>{library.gameModalContent.game_deck}</p>
                   <p><strong>Platform:</strong> {library.gameModalContent.platform_name}</p>
-                  <p><strong>Release Date:</strong> INSERT RELEASE DATE HERE</p>
+                  <p><strong>Release Date:</strong> {releaseDate}</p>
                   <p><strong>Complete:</strong> Yes/No</p>
                 </div>
                 <div className="col s12 m6 center-align">

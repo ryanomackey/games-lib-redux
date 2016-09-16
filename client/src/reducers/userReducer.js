@@ -33,7 +33,8 @@ export default function reducer(state=initialState, action) {
     }
     case "TOGGLE_CREATE_ACCOUNT": {
       return Object.assign({}, state, {
-        showCreateAccount: state.showCreateAccount = !state.showCreateAccount
+        showCreateAccount: state.showCreateAccount = !state.showCreateAccount,
+        loginMessage: state.loginMessage = !state.loginMessage
       });
     }
     case "CREATE_ACCOUNT_DUPLICATE": {

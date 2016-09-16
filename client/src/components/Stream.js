@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
+import Stagger from 'react-css-stagger';
 
 @connect((store) => {
   return {
@@ -14,7 +15,7 @@ export default class Stream extends React.Component {
     const {library} = this.props;
     if (library.streams.length) {
       return (
-        <div>
+        <Stagger transition="fadeIn" delay={100}>
           {library.streams.map((stream) => {
             const src = 'http://player.twitch.tv/?channel=' + stream.channel.name + '&autoplay=false';
             return (
@@ -30,10 +31,10 @@ export default class Stream extends React.Component {
               </div>
             )
           })}
-        </div>
+        </Stagger>
       )
     } else {
-      return null;
+      return <p>Sorry, no streams currently.</p>;
     }
   }
 }

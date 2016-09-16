@@ -5,7 +5,7 @@ const initialState = {
   searchResults: [],
   showGameSearch: false,
   searching: false,
-  libraryOrder: 'ASC',
+  libraryOrder: 'TITLE_ASC',
   platforms: [],
   platformArrow: 'arrow_drop_down',
   platformDropdown: false,
@@ -33,7 +33,6 @@ export default function reducer(state=initialState, action) {
       });
     }
     case "SEARCH_SUCCESS": {
-      console.log(action.payload.results);
       return Object.assign({}, state, {
         searchResults: action.payload.results,
         searching: false
@@ -57,8 +56,23 @@ export default function reducer(state=initialState, action) {
       });
     }
     case "TOGGLE_LIBRARY_ORDER": {
+      if (state.libraryOrder === 'TITLE_ASC') {
+        action.payload = 'TITLE_DESC';
+      } else {
+        action.payload = 'TITLE_ASC';
+      }
       return Object.assign({}, state, {
-        libraryOrder: state.libraryOrder === 'ASC' ? 'DESC' : 'ASC'
+        libraryOrder: action.payload
+      });
+    }
+    case "TOGGLE_RELEASE_ORDER": {
+      if (state.libraryOrder === 'RELEASE_DESC') {
+        action.payload = 'RELEASE_ASC';
+      } else {
+        action.payload = 'RELEASE_DESC';
+      }
+      return Object.assign({}, state, {
+        libraryOrder: action.payload
       });
     }
     case "TOGGLE_PLATFORM_DROPDOWN": {

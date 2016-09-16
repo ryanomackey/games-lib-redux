@@ -4,6 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {toggleLibraryOrder} from '../actions/libraryActions';
 import {togglePlatformDropdown} from '../actions/libraryActions';
+import {toggleReleaseOrder} from '../actions/libraryActions';
 import Platform from './Platform';
 
 @connect((store) => {
@@ -21,30 +22,40 @@ export default class FilterBar extends React.Component {
     this.props.dispatch(togglePlatformDropdown());
   }
 
+  toggleReleaseOrder() {
+    this.props.dispatch(toggleReleaseOrder());
+  }
+
   render() {
     const {library} = this.props;
     return (
-      <div className="row">
-        <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
-          <a onClick={this.toggleLibraryOrder.bind(this)} className="btn btn-large btn-block">
-            <i className="material-icons right">sort_by_alpha</i>Title:
-          </a>
+      <div>
+        <div className="row" style={{marginBottom:'0'}}>
+          <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
+            <a onClick={this.toggleLibraryOrder.bind(this)} className="btn btn-large btn-block">
+              <i className="material-icons right">sort_by_alpha</i>Title:
+            </a>
+          </div>
+          <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
+            <a onClick={this.toggleReleaseOrder.bind(this)} className="btn btn-large btn-block">
+              <i className="material-icons right">history</i>Release:
+            </a>
+          </div>
+          <div className="col s6 m6 l3">
+            <a className="btn btn-large btn-block">
+              <i className="material-icons right">done</i>Complete:
+            </a>
+          </div>
+          <div className="col s6 m6 l3">
+            <a onClick={this.togglePlatformDropdown.bind(this)} className="btn btn-large btn-block">
+              <i className="material-icons right">{library.platformArrow}</i>Platform:
+            </a>
+          </div>
         </div>
-        <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
-          <a className="btn btn-large btn-block">
-            <i className="material-icons right">history</i>Release:
-          </a>
-        </div>
-        <div className="col s6 m6 l3">
-          <a className="btn btn-large btn-block">
-            <i className="material-icons right">done</i>Complete:
-          </a>
-        </div>
-        <div className="col s6 m6 l3">
-          <a onClick={this.togglePlatformDropdown.bind(this)} className="btn btn-large btn-block">
-            <i className="material-icons right">{library.platformArrow}</i>Platform:
-          </a>
-          <Platform />
+        <div className="row" style={{marginBottom:'0'}}>
+          <div className="col s12">
+            <Platform />
+          </div>
         </div>
       </div>
     )

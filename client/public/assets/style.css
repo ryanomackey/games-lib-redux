@@ -107,3 +107,7 @@
 .fadeIn-enter.fadeIn-enter-active {
   opacity: 1;
 }
+
+iframe {
+  background-color: black;
+}
