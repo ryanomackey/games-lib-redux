@@ -19,7 +19,7 @@ export function login(email, password) {
       if (response.data.token) {
         sessionStorage.setItem('token',response.data.token);
         dispatch({type: 'LOGIN_SUCCESS', payload: response.data});
-        fetchLibrary(dispatch);
+        fetchLibrary(response.data.token, dispatch);
       } else {
         dispatch({type: 'LOGIN_FAILURE', payload: response.data});
       }
@@ -37,7 +37,17 @@ export function logout() {
   };
 }
 
-function fetchLibrary(dispatch) {
+export function toggleCreateAccount() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_CREATE_ACCOUNT'});
+  };
+}
+
+function fetchLibrary(token, dispatch) {
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000/',
+    headers: {'Authorization': 'Bearer ' + token}
+  });
   instance.get('/games')
   .then(function(response) {
     dispatch({type: 'LIBRARY_FETCH_SUCCESS', payload: response.data});
@@ -45,10 +55,4 @@ function fetchLibrary(dispatch) {
   .catch(function(err) {
     dispatch({type:'LIBRARY_FETCH_ERROR', payload: err});
   });
-}
-
-export function toggleCreateAccount() {
-  return function(dispatch) {
-    dispatch({type:'TOGGLE_CREATE_ACCOUNT'});
-  }
 }

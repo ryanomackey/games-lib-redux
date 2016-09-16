@@ -17,7 +17,9 @@ import {getLibrary} from '../actions/libraryActions';
 
 export default class Layout extends React.Component {
   componentWillMount() {
-    this.props.dispatch(getLibrary());
+    if (this.props.user.login) {
+      this.props.dispatch(getLibrary());
+    }
   }
   render () {
     const {user, library} = this.props;

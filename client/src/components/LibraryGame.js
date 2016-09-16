@@ -3,6 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {openGameModal} from '../actions/libraryActions';
+import Stagger from 'react-css-stagger';
 
 @connect((store) => {
   return {
@@ -12,9 +13,11 @@ import {openGameModal} from '../actions/libraryActions';
 })
 
 export default class LibraryGame extends React.Component {
+
   openGameModal(game) {
     this.props.dispatch(openGameModal(game));
   }
+
   render() {
     const { library} = this.props;
     library.library.sort(function(a,b) {
@@ -44,17 +47,19 @@ export default class LibraryGame extends React.Component {
     });
     return (
       <div className="row">
-        {library.library.map((game) => {
-          {if (game.is_visible) {
-            return (
-              <div key={game.game_id} className="col s12 m6 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
-                <div className="card-image" style={{height:'350px', display:'flex',alignItems:'center'}}>
-                  <img src={game.game_image} style={{width:'100%'}}/>
+        <Stagger transition="fadeIn" initialDelay={200} delay={175}>
+          {library.library.map((game) => {
+            {if (game.is_visible) {
+              return (
+                <div key={game.game_id} className="col s12 m6 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
+                  <div className="card-image" style={{height:'350px', display:'flex',alignItems:'center'}}>
+                    <img src={game.game_image} style={{width:'100%'}}/>
+                  </div>
                 </div>
-              </div>
-            )
-          }}
-        })}
+              )
+            }}
+          })}
+        </Stagger>
       </div>
     )
   }

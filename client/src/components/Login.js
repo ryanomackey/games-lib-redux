@@ -51,7 +51,7 @@ export default class Login extends React.Component {
               </div>
               <div className="row">
                 <div className="col s12 right-align">
-                  <button className="btn waves-effect waves-light" type="submit">Login</button>
+                  <button className="btn waves-effect waves-light" type="submit">Log in</button>
                 </div>
               </div>
             </form>

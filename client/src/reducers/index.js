@@ -6,5 +6,5 @@ import user from './userReducer';
 
 export default combineReducers({
   library,
-  user
+  user,
 });

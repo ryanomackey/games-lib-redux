@@ -50,10 +50,10 @@
 .create-account-modal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  padding: 20px 20px 50px 20px;
   border: 1px solid #888;
-  width: 80%;
-  height:95%;
+  width: 55%;
+  height:auto;
 }
 
 /* The Modal (background) */
@@ -97,4 +97,13 @@
 
 .card-content {
   height:100px;
+}
+
+.fadeIn-enter {
+  opacity: 0;
+  transition: 0.3s ease-in-out all;
+}
+
+.fadeIn-enter.fadeIn-enter-active {
+  opacity: 1;
 }

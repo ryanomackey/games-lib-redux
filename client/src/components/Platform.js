@@ -3,6 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {togglePlatform} from '../actions/libraryActions';
+import Stagger from 'react-css-stagger';
 
 @connect((store) => {
   return {
@@ -21,14 +22,16 @@ export default class Platform extends React.Component {
     if (library.platformDropdown) {
       return (
         <ul>
-          {library.platforms.map((platform, index) => {
-            return (
-              <p key={index} style={{paddingLeft:'5%'}}>
-                <input type="checkbox" id={platform} onClick={this.togglePlatform.bind(this)}/>
-                <label htmlFor={platform}>{platform}</label>
-              </p>
-            )
-          })}
+          <Stagger transition="fadeIn" delay={100}>
+            {library.platforms.map((platform, index) => {
+              return (
+                <p key={index} style={{paddingLeft:'5%'}}>
+                  <input type="checkbox" id={platform} onClick={this.togglePlatform.bind(this)}/>
+                  <label htmlFor={platform}>{platform}</label>
+                </p>
+              )
+            })}
+          </Stagger>
         </ul>
       )
     } else {
