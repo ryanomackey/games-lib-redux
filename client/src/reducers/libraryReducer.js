@@ -12,7 +12,8 @@ const initialState = {
   platformArray: [],
   gameModalShow: false,
   gameModalContent: {},
-  streams: []
+  streams: [],
+  showIncomplete: false
 };
 
 export default function reducer(state=initialState, action) {
@@ -106,10 +107,39 @@ export default function reducer(state=initialState, action) {
         streams: action.payload
       });
     }
+    case "TOGGLE_COMPLETED_FILTER": {
+      if (!state.showIncomplete) {
+        return Object.assign({}, state, {
+          library: completedFilter(state.library, 'HIDE_COMPLETE'),
+          showIncomplete: state.showIncomplete = !state.showIncomplete
+        });
+      } else {
+        return Object.assign({}, state, {
+          library: completedFilter(state.library, 'SHOW_COMPLETE'),
+          showIncomplete: state.showIncomplete = !state.showIncomplete
+        });
+      }
+      break;
+    }
     default: {
       return state;
     }
   }
+}
+
+function completedFilter(library, command) {
+  library.forEach((game) => {
+    if (command === 'HIDE_COMPLETE') {
+      if (game.completed) {
+        game.is_visible = false;
+      }
+    } else if (command === 'SHOW_COMPLETE') {
+      if (game.completed) {
+        game.is_visible = true;
+      }
+    }
+  });
+  return library;
 }
 
 function selectedToggle(arr, item) {

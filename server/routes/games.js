@@ -6,7 +6,7 @@ var knex = require('../db/knex');
 
 router.get('/', function(req, res) {
   knex('user_games').where({user_id:req.user.id})
-  .leftJoin('games','game_id','games.giantbomb_id').column('games.name AS game_name','image_url AS game_image','deck AS game_deck','games.giantbomb_id AS game_id','games.release_date AS game_release_date')
+  .leftJoin('games','game_id','games.giantbomb_id').column('games.name AS game_name','image_url AS game_image','deck AS game_deck','games.giantbomb_id AS game_id','games.release_date AS game_release_date','user_games.completed','user_games.own')
   .leftJoin('platforms','platform_id','platforms.giantbomb_id').column('platforms.name AS platform_name', 'platforms.giantbomb_id AS platform_id')
   .orderBy('game_name','ASC')
   .then(function(data) {
@@ -19,7 +19,6 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
   var game = req.body;
-  console.log(game);
   knex('games').where({giantbomb_id:game.game_id})
     .then(function(result) {
       if(!result.length) {
@@ -35,7 +34,7 @@ router.post('/', function(req, res) {
       });
     })
     .then(function() {
-      var userObj = {user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id};
+      var userObj = {user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id, completed: false, own: false};
       knex('user_games').where(userObj).then(function(result) {
         if(!result.length) {
           return knex('user_games').insert(userObj);
@@ -46,6 +45,18 @@ router.post('/', function(req, res) {
       throw error;
     });
   res.end();
+});
+
+router.put('/', function(req, res) {
+  var game = req.body;
+  knex('user_games').where({user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id})
+  .update({own:game.own,completed:game.completed})
+  .then(function() {
+    res.json({message:'Update successful'});
+  })
+  .catch(function() {
+    res.json({message: 'Update unsuccessful'});
+  });
 });
 
 module.exports = router;

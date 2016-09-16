@@ -5,6 +5,8 @@ exports.up = function(knex) {
     table.integer('user_id');
     table.integer('game_id');
     table.integer('platform_id');
+    table.boolean('completed');
+    table.boolean('own');
   });
 };
 

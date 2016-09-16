@@ -110,3 +110,39 @@ export function toggleReleaseOrder() {
     dispatch({type: 'TOGGLE_RELEASE_ORDER'});
   };
 }
+
+export function toggleComplete(game) {
+  const bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken}
+  });
+  return function(dispatch) {
+    game.completed = !game.completed;
+    instance.put('/games', game)
+    .then(function() {
+      dispatch({type: 'UPDATE_SUCCESSFUL'});
+    });
+  };
+}
+
+export function toggleOwn(game) {
+  const bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken}
+  });
+  return function(dispatch) {
+    game.own = !game.own;
+    instance.put('/games', game)
+    .then(function() {
+      dispatch({type: 'UPDATE_SUCCESSFUL'});
+    });
+  };
+}
+
+export function toggleCompletedFilter() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_COMPLETED_FILTER'});
+  };
+}

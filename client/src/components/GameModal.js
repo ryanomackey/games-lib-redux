@@ -3,6 +3,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {closeGameModal} from '../actions/libraryActions';
+import {toggleComplete} from '../actions/libraryActions';
+import {toggleOwn} from '../actions/libraryActions';
 import Stream from './Stream';
 import moment from 'moment';
 
@@ -22,6 +24,12 @@ export default class GameModal extends React.Component {
       this.props.dispatch(closeGameModal());
     }
   }
+  toggleComplete() {
+    this.props.dispatch(toggleComplete(this.props.library.gameModalContent));
+  }
+  toggleOwn() {
+    this.props.dispatch(toggleOwn(this.props.library.gameModalContent));
+  }
   render() {
     const {library} = this.props;
     const releaseDate = moment(library.gameModalContent.game_release_date).format('MMMM Do, YYYY');
@@ -40,7 +48,21 @@ export default class GameModal extends React.Component {
                   <p>{library.gameModalContent.game_deck}</p>
                   <p><strong>Platform:</strong> {library.gameModalContent.platform_name}</p>
                   <p><strong>Release Date:</strong> {releaseDate}</p>
-                  <p><strong>Complete:</strong> Yes/No</p>
+                  <p style={{display:'inline-block'}}><strong>Completed:</strong></p>
+                  <div className="switch" style={{display:'inline-block'}}>
+                    <label>
+                      <input type="checkbox" defaultChecked={library.gameModalContent.completed} onClick={this.toggleComplete.bind(this)}/>
+                      <span className="lever"></span>
+                    </label>
+                  </div>
+                  <br/>
+                  <p style={{display:'inline-block'}}><strong>Own:</strong></p>
+                  <div className="switch" style={{display:'inline-block'}}>
+                    <label>
+                      <input type="checkbox" defaultChecked={library.gameModalContent.own} onClick={this.toggleOwn.bind(this)}/>
+                      <span className="lever"></span>
+                    </label>
+                  </div>
                 </div>
                 <div className="col s12 m6 center-align">
                   <img src={library.gameModalContent.game_image} style={{width:'80%',height:'100%'}}/>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {toggleLibraryOrder} from '../actions/libraryActions';
 import {togglePlatformDropdown} from '../actions/libraryActions';
 import {toggleReleaseOrder} from '../actions/libraryActions';
+import {toggleCompletedFilter} from '../actions/libraryActions';
 import Platform from './Platform';
 
 @connect((store) => {
@@ -26,6 +27,10 @@ export default class FilterBar extends React.Component {
     this.props.dispatch(toggleReleaseOrder());
   }
 
+  toggleCompletedFilter() {
+    this.props.dispatch(toggleCompletedFilter());
+  }
+
   render() {
     const {library} = this.props;
     return (
@@ -42,8 +47,8 @@ export default class FilterBar extends React.Component {
             </a>
           </div>
           <div className="col s6 m6 l3">
-            <a className="btn btn-large btn-block">
-              <i className="material-icons right">done</i>Complete:
+            <a onClick={this.toggleCompletedFilter.bind(this)} className="btn btn-large btn-block">
+              <i className="material-icons right">done</i>Incomplete:
             </a>
           </div>
           <div className="col s6 m6 l3">
