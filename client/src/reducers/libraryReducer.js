@@ -17,6 +17,9 @@ const initialState = {
 
 export default function reducer(state=initialState, action) {
   switch(action.type) {
+    case "LOGOUT": {
+      return Object.assign({}, state, initialState);
+    }
     case "TOGGLE_GAME_SEARCH": {
       return Object.assign({}, state, {
         showGameSearch: state.showGameSearch = !state.showGameSearch,
@@ -67,7 +70,8 @@ export default function reducer(state=initialState, action) {
     case "TOGGLE_PLATFORM": {
       return Object.assign({}, state, {
         platformArray: arrayToggle(state.platformArray, action.payload),
-        library: filter(state.library, state.platformArray)
+        library: filter(state.library, state.platformArray),
+        platforms: selectedToggle(state.platforms, action.payload)
       });
     }
     case "OPEN_GAME_MODAL": {
@@ -92,6 +96,15 @@ export default function reducer(state=initialState, action) {
       return state;
     }
   }
+}
+
+function selectedToggle(arr, item) {
+  for (var i = 0; i < arr.length; i++) {
+    if(arr[i].name === item) {
+      arr[i].selected = !arr[i].selected;
+    }
+  }
+  return arr;
 }
 
 function arrayToggle(array, platform) {
@@ -152,5 +165,12 @@ function buildPlatformArray(arr) {
     }
     return 0;
   });
-  return newArr;
+  var objArr = [];
+  for (var i = 0; i < newArr.length; i++) {
+    objArr.push({
+      name: newArr[i],
+      selected: false
+    });
+  }
+  return objArr;
 }

@@ -22,7 +22,7 @@ export default class Library extends React.Component {
   }
 
   render() {
-    const {user, library} = this.props;
+    const {user} = this.props;
     if (!user.login) {
       return null
     }else {

@@ -26,8 +26,8 @@ export default class Platform extends React.Component {
             {library.platforms.map((platform, index) => {
               return (
                 <p key={index} style={{paddingLeft:'5%'}}>
-                  <input type="checkbox" id={platform} onClick={this.togglePlatform.bind(this)}/>
-                  <label htmlFor={platform}>{platform}</label>
+                  <input type="checkbox" id={platform.name} defaultChecked={platform.selected} onClick={this.togglePlatform.bind(this)}/>
+                  <label htmlFor={platform.name}>{platform.name}</label>
                 </p>
               )
             })}

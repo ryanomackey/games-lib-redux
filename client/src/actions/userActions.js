@@ -2,16 +2,10 @@
 
 import axios from 'axios';
 
-const bearerToken = sessionStorage.getItem('token');
-
-const instance = axios.create({
-  baseURL: 'http://localhost:3000/',
-  headers: {'Authorization': 'Bearer ' + bearerToken}
-});
-
 export function login(email, password) {
   return function(dispatch) {
-    instance.post('http://localhost:3000/authenticate/login', {
+    dispatch({type: 'LOGIN_INIT'});
+    axios.post('http://localhost:3000/authenticate/login', {
       email: email,
       password: password
     })
@@ -40,6 +34,23 @@ export function logout() {
 export function toggleCreateAccount() {
   return function(dispatch) {
     dispatch({type:'TOGGLE_CREATE_ACCOUNT'});
+  };
+}
+
+export function createAccount(data) {
+  return function(dispatch) {
+    dispatch({type:'CREATE_ACCOUNT_INIT'});
+    axios.post('http://localhost:3000/authenticate/signup', data)
+    .then(function(response) {
+      if (response.data.message === 'Email already exists.') {
+        dispatch({type: 'CREATE_ACCOUNT_DUPLICATE', payload: response.data.message});
+      } else if (response.data.message === 'Account successfully created.') {
+        dispatch({type: 'CREATE_ACCOUNT_SUCCESS', payload: response.data.message});
+      }
+    })
+    .catch(function(err) {
+      dispatch({type: 'CREATE_ACCOUNT_ERROR', payload: err});
+    });
   };
 }
 

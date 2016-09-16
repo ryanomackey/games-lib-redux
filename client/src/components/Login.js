@@ -54,6 +54,12 @@ export default class Login extends React.Component {
                   <button className="btn waves-effect waves-light" type="submit">Log in</button>
                 </div>
               </div>
+              <div className="row">
+                <div className="col s12">
+                  <p className="green-text">{user.createAccountSuccessMessage}</p>
+                  <p className="red-text">{user.loginMessage}</p>
+                </div>
+              </div>
             </form>
           </div>
           <div className="row">

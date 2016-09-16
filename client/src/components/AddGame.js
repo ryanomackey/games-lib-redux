@@ -25,7 +25,7 @@ export default class AddGame extends React.Component {
     }
   }
   render() {
-    const {user, library} = this.props;
+    const {library} = this.props;
     if (library.showGameSearch) {
       return (
         <div className="add-game-modal" id="modal" onClick={this.toggleGameSearchAlt.bind(this)}>

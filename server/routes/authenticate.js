@@ -33,7 +33,7 @@ router.post('/login', function(req, res) {
         var token = jwt.sign(profile, process.env.SECRET);
         res.json({token: token});
       } else {
-        res.json('Incorrect username or password.');
+        res.json('Incorrect email or password.');
       }
     });
   });

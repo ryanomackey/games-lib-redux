@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Nav from './Navbar';
 import Login from './Login';
 import Library from './Library';
-import Footer from './Footer';
 import {getLibrary} from '../actions/libraryActions';
 
 @connect((store) => {
@@ -22,7 +21,6 @@ export default class Layout extends React.Component {
     }
   }
   render () {
-    const {user, library} = this.props;
     return (
       <div>
         <Nav />

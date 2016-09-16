@@ -14,7 +14,7 @@ export default class LoadingBar extends React.Component {
     const {library} = this.props;
     if (library.searching) {
       return (
-        <div className="progress" style={{marginTop:'30%'}}>
+        <div className="progress" style={{marginTop:'22.5%'}}>
           <div className="indeterminate"></div>
         </div>
       )

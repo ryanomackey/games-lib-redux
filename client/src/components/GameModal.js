@@ -23,7 +23,6 @@ export default class GameModal extends React.Component {
   }
   render() {
     const {library} = this.props;
-    const fullScreen = true;
     if (library.gameModalShow) {
       return (
         <div className="game-modal" id="modal" onClick={this.closeGameModalAlt.bind(this)}>
