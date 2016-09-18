@@ -6,6 +6,7 @@ import AddGameSearch from './AddGameSearch';
 import AddGameSearchResults from './AddGameSearchResults';
 import {toggleGameSearch} from '../actions/libraryActions';
 import LoadingBar from './LoadingBar';
+import SteamImport from './SteamImport';
 
 @connect((store) => {
   return {
@@ -39,6 +40,7 @@ export default class AddGame extends React.Component {
             </div>
             <AddGameSearch />
             <LoadingBar />
+            <SteamImport />
             <AddGameSearchResults />
           </div>
         </div>

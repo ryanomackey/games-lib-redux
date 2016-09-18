@@ -49,9 +49,9 @@ export default class LibraryGame extends React.Component {
           {library.library.map((game) => {
             {if (game.is_visible) {
               return (
-                <div key={game.game_id} className="col s12 m6 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
-                  <div className="card-image" style={{height:'350px', display:'flex',alignItems:'center',cursor:'pointer'}}>
-                    <img src={game.game_image} style={{width:'100%'}}/>
+                <div key={game.game_id} className="col s6 m4 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
+                  <div className="card-image gradient-wrap" style={{objectFit:'scale-down',cursor:'pointer',display:'flex',justifyContent:'center'}}>
+                    <img src={game.game_image} style={{height:'385px',width:'auto'}} crossOrigin="Anonymous"/>
                   </div>
                 </div>
               )
