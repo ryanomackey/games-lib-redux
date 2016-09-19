@@ -13,6 +13,7 @@ var authenticate = require('./routes/authenticate');
 var api = require('./routes/api');
 var games = require('./routes/games');
 var steam = require('./routes/steam');
+var steamImport = require('./routes/steamImport');
 
 var app = express();
 
@@ -26,13 +27,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(cors());
 
 app.use('/authenticate', authenticate);
 app.use('/api', expressJwt({secret:process.env.SECRET}), api);
 app.use('/games', expressJwt({secret:process.env.SECRET}), games);
-app.use('/steam', expressJwt({secret:process.env.SECRET}), steam);
+app.use('/steam', steam);
+app.use('/steamImport', expressJwt({secret:process.env.SECRET}), steamImport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

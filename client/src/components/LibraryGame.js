@@ -47,11 +47,16 @@ export default class LibraryGame extends React.Component {
       <div className="row">
         <Stagger transition="fadeIn" initialDelay={200} delay={150}>
           {library.library.map((game) => {
+            const url = 'url(' + game.game_image + ')';
             {if (game.is_visible) {
               return (
                 <div key={game.game_id} className="col s6 m4 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
-                  <div className="card-image gradient-wrap" style={{objectFit:'scale-down',cursor:'pointer',display:'flex',justifyContent:'center'}}>
-                    <img src={game.game_image} style={{height:'385px',width:'auto'}} crossOrigin="Anonymous"/>
+                  <div className="card-image" style={{
+                    backgroundImage: url,
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'auto 100%'
+                  }}>
                   </div>
                 </div>
               )

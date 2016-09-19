@@ -14,16 +14,13 @@ passport.deserializeUser(function(obj, done) {
 });
 
 router.use(passport.initialize());
-router.use(passport.session());
 
 passport.use(new SteamStrategy({
     returnURL: 'http://localhost:3000/steam/return',
     realm: 'http://localhost:3000',
-    apiKey: process.env.STEAM,
-    passReqToCallback: true
+    apiKey: process.env.STEAM
   },
-  function(req, identifier, profile, done) {
-    console.log(req.body);
+  function(identifier, profile, done) {
     return done(null, profile);
   }
 ));
@@ -34,7 +31,8 @@ router.get('/return',
   passport.authenticate('steam', { failureRedirect: 'http://localhost:8000' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:8000/#/');
+    var steamId = req.session.passport.user.id;
+    res.redirect('http://localhost:8000/#/' + '?steamImport=true&steamId=' + steamId);
   });
 
 module.exports = router;

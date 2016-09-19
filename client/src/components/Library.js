@@ -7,6 +7,7 @@ import {toggleGameSearch} from '../actions/libraryActions';
 import LibraryGame from './LibraryGame';
 import FilterBar from './FilterBar';
 import GameModal from './GameModal';
+import SteamModal from './SteamModal';
 
 @connect((store) => {
   return {
@@ -47,6 +48,7 @@ export default class Library extends React.Component {
             <FilterBar />
             <hr/>
             <LibraryGame />
+            <SteamModal />
           </div>
         </main>
       )

@@ -12,6 +12,7 @@ export function login(email, password) {
     .then(function(response) {
       if (response.data.token) {
         sessionStorage.setItem('token',response.data.token);
+        sessionStorage.setItem('userEmail',response.data.userEmail);
         dispatch({type: 'LOGIN_SUCCESS', payload: response.data});
         fetchLibrary(response.data.token, dispatch);
       } else {
@@ -27,6 +28,7 @@ export function login(email, password) {
 export function logout() {
   return function(dispatch) {
     sessionStorage.removeItem('token');
+    axios.post('http://localhost:3000/authenticate/logout');
     dispatch({type: 'LOGOUT'});
   };
 }

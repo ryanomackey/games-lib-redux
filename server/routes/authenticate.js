@@ -32,7 +32,7 @@ router.post('/login', function(req, res) {
             email: data[0].email
           };
           var token = jwt.sign(profile, process.env.SECRET);
-          res.json({token: token});
+          res.json({token: token, userEmail: data[0].email});
         } else {
           res.json('Incorrect email or password.');
         }
@@ -41,6 +41,10 @@ router.post('/login', function(req, res) {
       res.json('No accounts listed under that email. Please try again.');
     }
   });
+});
+
+router.post('/logout', function(req, res) {
+  res.end();
 });
 
 module.exports = router;
