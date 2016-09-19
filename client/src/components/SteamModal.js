@@ -3,8 +3,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {toggleSteamModal} from '../actions/steamImportActions';
-import {importSteamSingle} from '../actions/steamImportActions';
+import {importSteamAll} from '../actions/steamImportActions';
 import {getLibrary} from '../actions/libraryActions';
+import SteamResults from './SteamResults';
+import SteamImportLoader from './SteamImportLoader';
 
 @connect((store) => {
   return {
@@ -24,18 +26,11 @@ export default class SteamModal extends React.Component {
       this.props.dispatch(getLibrary());
     }
   }
-  importSteamSingle(game) {
-    this.props.dispatch(importSteamSingle(game));
+  importSteamAll(steamLibrary) {
+    this.props.dispatch(importSteamAll(steamLibrary));
   }
   render() {
     const {steam} = this.props;
-    steam.steamResults.sort(function(a,b) {
-      var nameA = a.name.toUpperCase();
-      var nameB = b.name.toUpperCase();
-      if (nameA < nameB) {return -1;}
-      if (nameA > nameB) {return 1;}
-      return 0;
-    });
     if (steam.steamModalShow) {
       return (
         <div id="modal" className="steam-modal" onClick={this.toggleSteamModalAlt.bind(this)}>
@@ -48,30 +43,16 @@ export default class SteamModal extends React.Component {
                 <tr>
                   <th>Title</th>
                   <th className="right-align">
-                    <button className="btn waves-effect waves-light">
+                    <button className="btn waves-effect waves-light" onClick={this.importSteamAll.bind(this, steam.steamResults)}>
                       Import All
                       <i className="material-icons left">file_download</i>
                     </button>
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {steam.steamResults.map((game, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{game.name}</td>
-                      <td className="right-align">
-                        <button className="btn waves-effect waves-light" disabled={game.disabled} onClick={this.importSteamSingle.bind(this, game)}>
-                          Import
-                          <i className="material-icons left">file_download</i>
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
+              <SteamResults />
             </table>
-
+            <SteamImportLoader />
           </div>
         </div>
       )

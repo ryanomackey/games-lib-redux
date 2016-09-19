@@ -123,3 +123,19 @@ export function disableCurrent(results, game) {
   }
   return results;
 }
+
+export function importCount(steamLibrary) {
+  let total = 0;
+  for (var i = 0; i < steamLibrary.length; i++) {
+    if (!steamLibrary[i].disabled) {
+      total++;
+    }
+  }
+  return total;
+}
+
+export function filterDuplicates(arr) {
+  return arr.filter(function(x, i) {
+    return arr.indexOf(x) === i;
+  });
+}

@@ -1,6 +1,7 @@
 'use strict';
 
 import axios from 'axios';
+import {importCount} from '../library/helperFunctions';
 
 let bearerToken = sessionStorage.getItem('token');
 
@@ -38,6 +39,28 @@ export function importSteamSingle(game) {
     })
     .catch(function(err) {
       dispatch({type:"IMPORT_SINGLE_ERROR", payload:err});
+    });
+  };
+}
+
+export function importSteamAll(steamLibrary) {
+  return function (dispatch){
+    dispatch({type:"IMPORT_ALL_START"});
+    let offset = 0;
+    let count = 0;
+    const importTotal = importCount(steamLibrary);
+    steamLibrary.map((game) => {
+      if (!game.disabled) {
+        setTimeout(function() {
+          instance.get('/steamImport/single/?game=' + game.name + '&appid=' + game.appid);
+          count++;
+          dispatch({type: "CURRENT_IMPORT_UPDATE", payload: {name: game.name, progress: count / importTotal * 100}});
+          if (count / importTotal === 1) {
+            dispatch({type: "IMPORT_COMPLETE"});
+          }
+        }, 1000 + offset);
+        offset += 1000;
+      }
     });
   };
 }

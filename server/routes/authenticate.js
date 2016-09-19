@@ -32,7 +32,7 @@ router.post('/login', function(req, res) {
             email: data[0].email
           };
           var token = jwt.sign(profile, process.env.SECRET);
-          res.json({token: token, userEmail: data[0].email});
+          res.json({token: token});
         } else {
           res.json('Incorrect email or password.');
         }

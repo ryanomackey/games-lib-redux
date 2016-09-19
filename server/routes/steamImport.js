@@ -7,8 +7,6 @@ var knex = require('../db/knex');
 
 router.get('/single', function(req, res) {
 
-  console.log(req.query);
-
   var query = encodeURI(req.query.game);
 
   var path = '/api/search/?api_key=' + process.env.GIANT_BOMB + '&format=json&limit=20&resources=game&query=' + query;
@@ -32,6 +30,12 @@ router.get('/single', function(req, res) {
     response.on('end', function () {
       var parsed = JSON.parse(str);
       var game = parsed.results[0];
+      var image_url;
+      if (game && game.image) {
+        image_url = game.image.small_url;
+      } else {
+        image_url = '';
+      }
       knex('games').where({giantbomb_id:Number(game.id)})
         .then(function(result) {
           if(!result.length) {
@@ -39,7 +43,7 @@ router.get('/single', function(req, res) {
               giantbomb_id:game.id,
               steam_id: req.query.appid,
               name: game.name,
-              image_url:game.image.small_url,
+              image_url: image_url,
               deck:game.deck,
               release_date:game.original_release_date
             });
@@ -64,8 +68,8 @@ router.get('/single', function(req, res) {
             }
           });
         })
-        .catch(function(error) {
-          throw error;
+        .catch(function(err) {
+          console.error(err);
         });
     });
     res.end();
