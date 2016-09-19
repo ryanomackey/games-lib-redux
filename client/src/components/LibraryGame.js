@@ -46,11 +46,11 @@ export default class LibraryGame extends React.Component {
     return (
       <div className="row">
         <Stagger transition="fadeIn" initialDelay={200} delay={150}>
-          {library.library.map((game) => {
+          {library.library.map((game, index) => {
             const url = 'url(' + game.game_image + ')';
             {if (game.is_visible) {
               return (
-                <div key={game.game_id} className="col s6 m4 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
+                <div key={index} className="col s6 m4 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
                   <div className="card-image" style={{
                     backgroundImage: url,
                     backgroundPosition: 'center',

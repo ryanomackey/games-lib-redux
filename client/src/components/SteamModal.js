@@ -3,6 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {toggleSteamModal} from '../actions/steamImportActions';
+import {importSteamSingle} from '../actions/steamImportActions';
 
 @connect((store) => {
   return {
@@ -19,6 +20,9 @@ export default class SteamModal extends React.Component {
     if (modal == event.target) {
       this.props.dispatch(toggleSteamModal());
     }
+  }
+  importSteamSingle(game) {
+    this.props.dispatch(importSteamSingle(game));
   }
   render() {
     const {steam} = this.props;
@@ -38,21 +42,23 @@ export default class SteamModal extends React.Component {
             </div>
             <table className="bordered highlight" style={{width:'80%',margin:'auto'}}>
               <thead>
-                <th>Title</th>
-                <th className="right-align">
-                  <button className="btn waves-effect waves-light">
-                    Import All
-                    <i className="material-icons left">file_download</i>
-                  </button>
-                </th>
+                <tr>
+                  <th>Title</th>
+                  <th className="right-align">
+                    <button className="btn waves-effect waves-light">
+                      Import All
+                      <i className="material-icons left">file_download</i>
+                    </button>
+                  </th>
+                </tr>
               </thead>
               <tbody>
                 {steam.steamResults.map((game) => {
                   return (
-                    <tr>
+                    <tr key={game.appid}>
                       <td>{game.name}</td>
                       <td className="right-align">
-                        <button className="btn waves-effect waves-light">
+                        <button className="btn waves-effect waves-light" onClick={this.importSteamSingle.bind(this, game)}>
                           Import
                           <i className="material-icons left">file_download</i>
                         </button>

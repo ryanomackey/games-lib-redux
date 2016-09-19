@@ -28,3 +28,12 @@ export function toggleSteamModal() {
     dispatch({type:"TOGGLE_STEAM_MODAL"});
   };
 }
+
+export function importSteamSingle(game) {
+  return function(dispatch) {
+    instance.get('/steamImport/single/?game=' + game.name)
+    .then(function(response) {
+      console.log(response);
+    });
+  };
+}
