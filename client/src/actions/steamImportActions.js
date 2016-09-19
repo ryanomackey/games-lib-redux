@@ -31,9 +31,13 @@ export function toggleSteamModal() {
 
 export function importSteamSingle(game) {
   return function(dispatch) {
-    instance.get('/steamImport/single/?game=' + game.name)
-    .then(function(response) {
-      console.log(response);
+    dispatch({type:"IMPORT_SINGLE_START", payload: game});
+    instance.get('/steamImport/single/?game=' + game.name + '&appid=' + game.appid)
+    .then(function() {
+      dispatch({type:"IMPORT_SINGLE_SUCCESS"});
+    })
+    .catch(function(err) {
+      dispatch({type:"IMPORT_SINGLE_ERROR", payload:err});
     });
   };
 }

@@ -102,3 +102,24 @@ export function buildPlatformArray(arr) {
   }
   return objArr;
 }
+
+export function disableExisitingTitles(steamResults, library) {
+  for (var i = 0; i < steamResults.length; i++) {
+    steamResults[i].disabled = false;
+    for (var j = 0; j < library.length; j++) {
+      if (library[j].game_steam_id === steamResults[i].appid) {
+        steamResults[i].disabled = true;
+      }
+    }
+  }
+  return steamResults;
+}
+
+export function disableCurrent(results, game) {
+  for (var i = 0; i < results.length; i++) {
+    if (results[i].name === game.name) {
+      results[i].disabled = true;
+    }
+  }
+  return results;
+}

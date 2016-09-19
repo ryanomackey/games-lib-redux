@@ -29,7 +29,7 @@ export default class Library extends React.Component {
     }else {
       return (
         <main>
-          <div className="container">
+          <div className="container-fluid">
             <div className="row" style={{marginTop:'5%'}}>
               <div className="col s10">
                 <h2 style={{margin:0}}>Library</h2>

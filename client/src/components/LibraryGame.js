@@ -50,7 +50,7 @@ export default class LibraryGame extends React.Component {
             const url = 'url(' + game.game_image + ')';
             {if (game.is_visible) {
               return (
-                <div key={index} className="col s6 m4 l3" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
+                <div key={index} className="col s4 m3 l2" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
                   <div className="card-image" style={{
                     backgroundImage: url,
                     backgroundPosition: 'center',
