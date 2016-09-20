@@ -43,11 +43,11 @@ export default class GameModal extends React.Component {
               </div>
               <div className="row">
                 <div className="col s12 m6">
-                  <h3>{library.gameModalContent.game_name}</h3>
+                  <h1><strong>{library.gameModalContent.game_name}</strong></h1>
                   <hr/>
-                  <p>{library.gameModalContent.game_deck}</p>
-                  <p><strong>Platform:</strong> {library.gameModalContent.platform_name}</p>
-                  <p><strong>Release Date:</strong> {releaseDate}</p>
+                  <p className="flow-text">{library.gameModalContent.game_deck}</p>
+                  <p className="flow-text"><strong>Platform:</strong> {library.gameModalContent.platform_name}</p>
+                  <p className="flow-text"><strong>Release Date:</strong> {releaseDate}</p>
                   <p style={{display:'inline-block'}}><strong>Completed:</strong></p>
                   <div className="switch" style={{display:'inline-block'}}>
                     <label>
@@ -69,8 +69,8 @@ export default class GameModal extends React.Component {
                 </div>
               </div>
               <div className="row">
+                <h1 style={{marginTop:'0'}}><strong>Streams</strong></h1>
                 <hr/>
-                <h5>Current streams:</h5>
                 <Stream />
               </div>
             </div>

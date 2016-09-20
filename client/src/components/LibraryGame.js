@@ -3,7 +3,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {openGameModal} from '../actions/libraryActions';
-import Stagger from 'react-css-stagger';
 
 @connect((store) => {
   return {
@@ -45,24 +44,23 @@ export default class LibraryGame extends React.Component {
     });
     return (
       <div className="row">
-        <Stagger transition="fadeIn" initialDelay={200} delay={150}>
-          {library.library.map((game, index) => {
-            const url = 'url(' + game.game_image + ')';
-            {if (game.is_visible) {
-              return (
-                <div key={index} className="col s4 m3 l2" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
-                  <div className="card-image" style={{
-                    backgroundImage: url,
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'auto 100%'
-                  }}>
-                  </div>
+        {library.library.map((game, index) => {
+          const url = 'url(' + game.game_image + ')';
+          {if (game.is_visible) {
+            return (
+              <div key={index} className="col s4 m3 l2" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
+                <div className="card-image" style={{
+                  backgroundImage: url,
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'auto 100%',
+                  boxShadow: '5px 5px 2.5px'
+                }}>
                 </div>
-              )
-            }}
-          })}
-        </Stagger>
+              </div>
+            )
+          }}
+        })}
       </div>
     )
   }

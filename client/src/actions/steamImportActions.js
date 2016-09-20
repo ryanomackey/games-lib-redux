@@ -57,6 +57,7 @@ export function importSteamAll(steamLibrary) {
           dispatch({type: "CURRENT_IMPORT_UPDATE", payload: {name: game.name, progress: count / importTotal * 100}});
           if (count / importTotal === 1) {
             dispatch({type: "IMPORT_COMPLETE"});
+            location.replace('/');
           }
         }, 1000 + offset);
         offset += 1000;

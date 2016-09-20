@@ -33,7 +33,7 @@ export default class Stream extends React.Component {
         </div>
       )
     } else {
-      return <p>Sorry, no streams currently.</p>;
+      return <p className="flow-text">Sorry, no streams currently.</p>;
     }
   }
 }

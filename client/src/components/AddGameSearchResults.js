@@ -46,13 +46,13 @@ export default class AddGameSearchResults extends React.Component {
             platforms = [{id:0, name:'N/A'}];
           }
           return (
-            <div className="col s12 m4 l3" style={{height:'500px',marginTop:'1%',marginBottom:'1%'}} key={searchResult.id}>
+            <div className="col s12 m4 l4" style={{height:'455px',marginTop:'1%',marginBottom:'1%'}} key={searchResult.id}>
               <div className="card search-result">
                 <div className="card-image waves-effect waves-block waves-light" style={{display:'flex',alignItems:'center'}}>
                   <img className="activator" src={image_url}/>
                 </div>
                 <div className="card-content">
-                  <span className="card-title activator grey-text text-darken-4">{searchResult.name}</span>
+                  <span className="card-title activator grey-text text-darken-4 truncate">{searchResult.name}</span>
                 </div>
                 <div className="card-reveal">
                   <span className="card-title grey-text text-darken-4"><i className="material-icons right">close</i>{searchResult.name}</span>

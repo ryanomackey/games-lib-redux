@@ -36,12 +36,12 @@ export default class FilterBar extends React.Component {
     return (
       <div>
         <div className="row" style={{marginBottom:'0'}}>
-          <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
+          <div className="col s6 m6 l3" style={{marginBottom:'1%'}}>
             <a onClick={this.toggleLibraryOrder.bind(this)} className="btn btn-large btn-block">
               <i className="material-icons right">sort_by_alpha</i>Title:
             </a>
           </div>
-          <div className="col s6 m6 l3" style={{marginBottom:'2%'}}>
+          <div className="col s6 m6 l3" style={{marginBottom:'1%'}}>
             <a onClick={this.toggleReleaseOrder.bind(this)} className="btn btn-large btn-block">
               <i className="material-icons right">history</i>Release:
             </a>

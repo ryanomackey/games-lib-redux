@@ -32,7 +32,7 @@ export default class Library extends React.Component {
           <div className="container-fluid">
             <div className="row" style={{marginTop:'5%'}}>
               <div className="col s10">
-                <h2 style={{margin:0}}>Library</h2>
+                <h1 style={{margin:0}}><strong>Library</strong></h1>
               </div>
               <div className="col s2 right-align">
                 <a onClick={this.toggleGameSearch.bind(this)}

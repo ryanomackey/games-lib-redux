@@ -29,52 +29,56 @@ router.get('/single', function(req, res) {
 
     response.on('end', function () {
       var parsed = JSON.parse(str);
-      var game = parsed.results[0];
-      var image_url;
-      if (game && game.image) {
-        image_url = game.image.small_url;
-      } else {
-        image_url = '';
-      }
-      knex('games').where({giantbomb_id:Number(game.id)})
-        .then(function(result) {
-          if(!result.length) {
-            return knex('games').insert({
-              giantbomb_id:game.id,
-              steam_id: req.query.appid,
-              name: game.name,
-              image_url: image_url,
-              deck:game.deck,
-              release_date:game.original_release_date
-            });
-          }
-        })
-        .then(function() {
-          knex('platforms').where({giantbomb_id:94})
+      var game;
+      if (parsed.results[0]) {
+        game = parsed.results[0];
+        var image_url;
+        if (game.image) {
+          image_url = game.image.small_url;
+        } else {
+          image_url = '';
+        }
+        knex('games').where({giantbomb_id:Number(game.id)})
           .then(function(result) {
             if(!result.length) {
-              return knex('platforms').insert({
-                giantbomb_id: 94,
-                name:'PC'
+              return knex('games').insert({
+                giantbomb_id:game.id,
+                steam_id: req.query.appid,
+                name: game.name,
+                image_url: image_url,
+                deck:game.deck,
+                release_date:game.original_release_date
               });
             }
+          })
+          .then(function() {
+            knex('platforms').where({giantbomb_id:94})
+            .then(function(result) {
+              if(!result.length) {
+                return knex('platforms').insert({
+                  giantbomb_id: 94,
+                  name:'PC'
+                });
+              }
+            });
+          })
+          .then(function() {
+            var userObj = {user_id:req.user.id, game_id:game.id, platform_id: 94, completed: false, own: true};
+            knex('user_games').where(userObj).then(function(result) {
+              if(!result.length) {
+                return knex('user_games').insert(userObj);
+              }
+            });
+          })
+          .catch(function(err) {
+            console.error(err);
           });
-        })
-        .then(function() {
-          var userObj = {user_id:req.user.id, game_id:game.id, platform_id: 94, completed: false, own: true};
-          knex('user_games').where(userObj).then(function(result) {
-            if(!result.length) {
-              return knex('user_games').insert(userObj);
-            }
-          });
-        })
-        .catch(function(err) {
-          console.error(err);
-        });
-    });
-    res.end();
+        } else {
+          res.end();
+        }
+      });
+      res.end();
   }
-
   http.request(options, callback).end();
 });
 
