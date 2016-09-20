@@ -30,23 +30,22 @@ export default class Library extends React.Component {
       return (
         <main>
           <div className="container-fluid">
-            <div className="row" style={{margin:'5% 0 0 0'}}>
-              <div className="col s10">
-                <h1 style={{margin:'0 0 1% 0'}}><strong>Library</strong></h1>
+            <div className="row">
+              <div className="col s12">
+                <h1><strong>Library</strong></h1>
               </div>
-              <div className="col s2 right-align">
-                <a onClick={this.toggleGameSearch.bind(this)}
-                   className="btn-floating btn-large waves-effect waves-light">
-                  <i className="material-icons">
-                    add
-                  </i>
-                </a>
-              </div>
+            </div>
+            <div className="row z-depth-5" id="control-bar" style={{margin:'5% 0 0 0'}}>
+              <a onClick={this.toggleGameSearch.bind(this)} id="add-game-button"
+                 className="btn-floating btn-large waves-effect waves-light">
+                <i className="material-icons">
+                  add
+                </i>
+              </a>
               <AddGame />
               <GameModal />
               <FilterBar />
             </div>
-            <hr/>
             <LibraryGame />
             <SteamModal />
           </div>

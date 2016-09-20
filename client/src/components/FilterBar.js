@@ -36,6 +36,9 @@ export default class FilterBar extends React.Component {
     const {library} = this.props;
     return (
       <div>
+        <div className="row" style={{margin:'10px'}}>
+          <LibrarySearch/>
+        </div>
         <div className="row" style={{marginBottom:'0'}}>
           <div className="col s6 m6 l3" style={{marginBottom:'1%'}}>
             <a onClick={this.toggleLibraryOrder.bind(this)} className="btn btn-large btn-block">
@@ -59,12 +62,9 @@ export default class FilterBar extends React.Component {
           </div>
         </div>
         <div className="row" style={{marginBottom:'0'}}>
-          <div className="col s12">
+          <div className="col s12 right-align">
             <Platform />
           </div>
-        </div>
-        <div className="row" style={{margin:'10px'}}>
-          <LibrarySearch/>
         </div>
       </div>
     )

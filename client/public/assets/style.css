@@ -136,3 +136,25 @@
 iframe {
   background-color: black;
 }
+
+body {
+  position: relative;
+  padding-bottom: 170px;
+}
+
+#control-bar {
+  position: fixed;
+  background-color: white;
+  bottom: 0;
+  width:100%;
+  z-index: 1;
+  padding-top: 1.5%;
+  height:-3%;
+}
+
+#add-game-button {
+  margin-bottom: 1%;
+  position: absolute;
+  top:-17%;
+  right: .8%;
+}

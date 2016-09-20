@@ -22,12 +22,12 @@ export default class LibraryGame extends React.Component {
 
   addStyle(event) {
     event.target.style.transform = 'translate(-2.5px, -2.5px)';
-    event.target.style.boxShadow = '7.5px 7.5px 5px';
+    event.target.className = 'card-image z-depth-3'
   }
 
   removeStyle(event) {
     event.target.style.transform = 'translate(2.5px, 2.5px)';
-    event.target.style.boxShadow = '5px 5px 2.5px';
+    event.target.className = 'card-image z-depth-4'
   }
 
   render() {
@@ -75,7 +75,7 @@ export default class LibraryGame extends React.Component {
                 }}
                 onClick={this.openGameModal.bind(this, game)}>
                 <div
-                  className="card-image"
+                  className="card-image z-depth-4"
                   onMouseEnter={this.addStyle.bind(this)}
                   onMouseLeave={this.removeStyle.bind(this)}
                   style={{
@@ -83,7 +83,6 @@ export default class LibraryGame extends React.Component {
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'auto 100%',
-                    boxShadow: '5px 5px 2.5px'
                   }}>
                 </div>
               </div>
