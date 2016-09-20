@@ -19,7 +19,8 @@ const initialState = {
   gameModalShow: false,
   gameModalContent: {},
   streams: [],
-  showIncomplete: false
+  showIncomplete: false,
+  deleteConfirm: false,
 };
 
 export default function reducer(state=initialState, action) {
@@ -126,6 +127,24 @@ export default function reducer(state=initialState, action) {
         });
       }
       break;
+    }
+    case "REMOVE_TITLE_OPTIMISTIC": {
+      const index = state.library.indexOf(action.payload);
+      return Object.assign({}, state, {
+        gameModalShow: state.gameModalShow = !state.gameModalShow,
+        gameModalContent: {},
+        streams: {},
+        deleteConfirm: false,
+        library: [
+          ...state.library.slice(0, index),
+          ...state.library.slice(index + 1)
+        ]
+      });
+    }
+    case "TOGGLE_DELETE_CONFIRM": {
+      return Object.assign({}, state, {
+        deleteConfirm: state.deleteConfirm === false ? true : false,
+      });
     }
     default: {
       return state;

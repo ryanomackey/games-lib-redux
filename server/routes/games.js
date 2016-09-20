@@ -59,4 +59,21 @@ router.put('/', function(req, res) {
   });
 });
 
+router.delete('/', function(req, res) {
+  var game = req.body;
+  knex('user_games')
+  .where({user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id})
+  .del()
+  .then(function(result) {
+    if (result === 1) {
+      res.json({message: 'Delete successful'});
+    } else {
+      res.json({message: 'Delete unsuccessful'});
+    }
+  })
+  .catch(function(err) {
+    res.json({message: 'Delete error', error: err});
+  });
+});
+
 module.exports = router;

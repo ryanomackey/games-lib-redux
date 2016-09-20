@@ -7,6 +7,7 @@ import {toggleComplete} from '../actions/libraryActions';
 import {toggleOwn} from '../actions/libraryActions';
 import Stream from './Stream';
 import moment from 'moment';
+import DeleteGame from './DeleteGame';
 
 @connect((store) => {
   return {
@@ -47,16 +48,15 @@ export default class GameModal extends React.Component {
                   <hr/>
                   <p className="flow-text">{library.gameModalContent.game_deck}</p>
                   <p className="flow-text"><strong>Platform:</strong> {library.gameModalContent.platform_name}</p>
-                  <p className="flow-text"><strong>Release Date:</strong> {releaseDate}</p>
-                  <p style={{display:'inline-block'}}><strong>Completed:</strong></p>
-                  <div className="switch" style={{display:'inline-block'}}>
+                  <p className="flow-text" style={{marginBottom:'0'}}><strong>Release Date:</strong> {releaseDate}</p>
+                  <p className="flow-text" style={{display:'inline-block'}}><strong>Completed:</strong></p>
+                  <div className="switch" style={{display:'inline-block',marginRight:'5%'}}>
                     <label>
                       <input type="checkbox" defaultChecked={library.gameModalContent.completed} onClick={this.toggleComplete.bind(this)}/>
                       <span className="lever"></span>
                     </label>
                   </div>
-                  <br/>
-                  <p style={{display:'inline-block'}}><strong>Own:</strong></p>
+                  <p className="flow-text" style={{display:'inline-block'}}><strong>Own:</strong></p>
                   <div className="switch" style={{display:'inline-block'}}>
                     <label>
                       <input type="checkbox" defaultChecked={library.gameModalContent.own} onClick={this.toggleOwn.bind(this)}/>
@@ -72,6 +72,9 @@ export default class GameModal extends React.Component {
                 <h1 style={{marginTop:'0'}}><strong>Streams</strong></h1>
                 <hr/>
                 <Stream />
+              </div>
+              <div className="row center-align">
+                <DeleteGame />
               </div>
             </div>
           </div>

@@ -34,7 +34,7 @@ export default class Login extends React.Component {
             <form className="col s8 push-s2" onSubmit={this.login.bind(this)}>
               <div className="row">
                 <div className="col s12">
-                  <h3>Login</h3>
+                  <h1><strong>Login</strong></h1>
                 </div>
               </div>
               <div className="row">

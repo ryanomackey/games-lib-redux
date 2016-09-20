@@ -2,6 +2,13 @@
 
 import axios from 'axios';
 
+let bearerToken = sessionStorage.getItem('token');
+
+const instance = axios.create({
+  baseURL: 'http://localhost:3000',
+  headers: {'Authorization': 'Bearer ' + bearerToken}
+});
+
 export function toggleGameSearch() {
   return function(dispatch) {
     dispatch({type: 'TOGGLE_GAME_SEARCH'});
@@ -9,11 +16,7 @@ export function toggleGameSearch() {
 }
 
 export function giantBombSearch(searchQuery) {
-  const bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
+  bearerToken = sessionStorage.getItem('token');
   return function(dispatch) {
     dispatch({type: 'SEARCH_START'});
     instance.get('api/search?query=' + searchQuery)
@@ -31,11 +34,7 @@ export function giantBombSearch(searchQuery) {
 }
 
 export function addToLibrary(game) {
-  const bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
+  bearerToken = sessionStorage.getItem('token');
   return function(dispatch) {
     dispatch({type: 'LIBRARY_OPTIMISTIC', payload: game});
     instance.post('games', game)
@@ -49,11 +48,7 @@ export function addToLibrary(game) {
 }
 
 export function getLibrary() {
-  const bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
+  bearerToken = sessionStorage.getItem('token');
   return function(dispatch) {
     dispatch({type: 'LIBRARY_FETCHING'});
     instance.get('/games')
@@ -85,11 +80,7 @@ export function togglePlatform(platform) {
 }
 
 export function openGameModal(game) {
-  const bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
+  bearerToken = sessionStorage.getItem('token');
   return function(dispatch) {
     dispatch({type:'OPEN_GAME_MODAL', payload:game});
     instance.get('/api/twitch?q=' + game.game_name)
@@ -112,11 +103,7 @@ export function toggleReleaseOrder() {
 }
 
 export function toggleComplete(game) {
-  const bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
+  bearerToken = sessionStorage.getItem('token');
   return function(dispatch) {
     game.completed = !game.completed;
     instance.put('/games', game)
@@ -127,11 +114,7 @@ export function toggleComplete(game) {
 }
 
 export function toggleOwn(game) {
-  const bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
+  bearerToken = sessionStorage.getItem('token');
   return function(dispatch) {
     game.own = !game.own;
     instance.put('/games', game)
@@ -144,5 +127,30 @@ export function toggleOwn(game) {
 export function toggleCompletedFilter() {
   return function(dispatch) {
     dispatch({type:'TOGGLE_COMPLETED_FILTER'});
+  };
+}
+
+export function removeTitle(game) {
+  bearerToken = sessionStorage.getItem('token');
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {'Authorization': 'Bearer ' + bearerToken},
+    data: game,
+  });
+  return function(dispatch) {
+    dispatch({type:'REMOVE_TITLE_OPTIMISTIC', payload: game});
+    instance.delete('/games')
+    .then(function(response) {
+      dispatch({type:'DELETE_SUCCESSFUL', payload: response});
+    })
+    .catch(function(err) {
+      dispatch({type:'DELETE_ERROR', payload: err});
+    });
+  };
+}
+
+export function toggleDeleteConfirm() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_DELETE_CONFIRM'});
   };
 }
