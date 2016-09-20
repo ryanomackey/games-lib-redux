@@ -154,3 +154,9 @@ export function toggleDeleteConfirm() {
     dispatch({type:'TOGGLE_DELETE_CONFIRM'});
   };
 }
+
+export function updateSearch(searchQuery) {
+  return function(dispatch) {
+    dispatch({type:'UPDATE_SEARCH', payload: searchQuery});
+  };
+}

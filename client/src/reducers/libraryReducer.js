@@ -21,6 +21,7 @@ const initialState = {
   streams: [],
   showIncomplete: false,
   deleteConfirm: false,
+  searchQuery: ''
 };
 
 export default function reducer(state=initialState, action) {
@@ -144,6 +145,11 @@ export default function reducer(state=initialState, action) {
     case "TOGGLE_DELETE_CONFIRM": {
       return Object.assign({}, state, {
         deleteConfirm: state.deleteConfirm === false ? true : false,
+      });
+    }
+    case "UPDATE_SEARCH": {
+      return Object.assign({}, state, {
+        searchQuery: action.payload,
       });
     }
     default: {

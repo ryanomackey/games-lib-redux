@@ -25,7 +25,7 @@ export default class AddGameSearch extends React.Component {
         <div className="nav-wrapper teal">
           <form onSubmit={this.giantBombSearch.bind(this)}>
             <div className="input-field">
-              <input id="search" type="search" ref={c => this.searchQuery = c} />
+              <input id="search" type="search" ref={c => this.searchQuery = c} required/>
               <label htmlFor="search"><i className="material-icons">search</i></label>
               <i className="material-icons">close</i>
             </div>

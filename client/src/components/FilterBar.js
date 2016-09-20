@@ -7,6 +7,7 @@ import {togglePlatformDropdown} from '../actions/libraryActions';
 import {toggleReleaseOrder} from '../actions/libraryActions';
 import {toggleCompletedFilter} from '../actions/libraryActions';
 import Platform from './Platform';
+import LibrarySearch from './LibrarySearch';
 
 @connect((store) => {
   return {
@@ -61,6 +62,9 @@ export default class FilterBar extends React.Component {
           <div className="col s12">
             <Platform />
           </div>
+        </div>
+        <div className="row" style={{margin:'10px'}}>
+          <LibrarySearch/>
         </div>
       </div>
     )

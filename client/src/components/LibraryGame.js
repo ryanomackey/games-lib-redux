@@ -7,7 +7,10 @@ import {openGameModal} from '../actions/libraryActions';
 @connect((store) => {
   return {
     user: store.user,
-    library: store.library
+    library: store.library,
+    filteredLibrary: store.library.library.filter((game) => {
+      return game.game_name.toLowerCase().indexOf(store.library.searchQuery) !== -1;
+    })
   };
 })
 
@@ -18,8 +21,8 @@ export default class LibraryGame extends React.Component {
   }
 
   render() {
-    const { library} = this.props;
-    library.library.sort(function(a,b) {
+    const {library, filteredLibrary} = this.props;
+    filteredLibrary.sort(function(a,b) {
       var nameA = a.game_name.toUpperCase(); // ignore upper and lowercase
       var nameB = b.game_name.toUpperCase(); // ignore upper and lowercase
       var dateA = a.game_release_date;
@@ -33,29 +36,27 @@ export default class LibraryGame extends React.Component {
         if (nameA < nameB) {return 1;}
         return 0;
       } else if (library.libraryOrder === 'RELEASE_ASC') {
-        if (dateA < dateB) {return -1;}
-        if (dateA > dateB) {return 1;}
-        return 0;
+        if (dateA && dateB) {
+          if (dateA < dateB) {return -1;}
+          if (dateA > dateB) {return 1;}
+          return 0;
+        }
       } else if (library.libraryOrder === 'RELEASE_DESC') {
-        if (dateA > dateB) {return -1;}
-        if (dateA < dateB) {return 1;}
-        return 0;
+        if (dateA && dateB) {
+          if (dateA > dateB) {return -1;}
+          if (dateA < dateB) {return 1;}
+          return 0;
+        }
       }
     });
     return (
       <div className="row">
-        {library.library.map((game, index) => {
+        {filteredLibrary.map((game, index) => {
           const url = 'url(' + game.game_image + ')';
           {if (game.is_visible) {
             return (
               <div key={index} className="col s4 m3 l2" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
-                <div className="card-image" style={{
-                  backgroundImage: url,
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'auto 100%',
-                  boxShadow: '5px 5px 2.5px'
-                }}>
+                <div className="card-image" style={{backgroundImage: url, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'auto 100%', boxShadow: '5px 5px 2.5px'}}>
                 </div>
               </div>
             )
