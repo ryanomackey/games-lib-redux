@@ -30,9 +30,9 @@ export default class Library extends React.Component {
       return (
         <main>
           <div className="container-fluid">
-            <div className="row" style={{marginTop:'5%'}}>
+            <div className="row" style={{margin:'5% 0 0 0'}}>
               <div className="col s10">
-                <h1 style={{margin:0}}><strong>Library</strong></h1>
+                <h1 style={{margin:'0 0 1% 0'}}><strong>Library</strong></h1>
               </div>
               <div className="col s2 right-align">
                 <a onClick={this.toggleGameSearch.bind(this)}
@@ -42,10 +42,10 @@ export default class Library extends React.Component {
                   </i>
                 </a>
               </div>
+              <AddGame />
+              <GameModal />
+              <FilterBar />
             </div>
-            <AddGame />
-            <GameModal />
-            <FilterBar />
             <hr/>
             <LibraryGame />
             <SteamModal />

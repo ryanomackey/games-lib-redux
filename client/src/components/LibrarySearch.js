@@ -12,7 +12,7 @@ import {updateSearch} from '../actions/libraryActions';
 
 export default class LibrarySearch extends React.Component {
   updateSearch(event) {
-    this.props.dispatch(updateSearch(event.target.value));
+    this.props.dispatch(updateSearch(event.target.value.toLowerCase()));
   }
   render() {
     return(

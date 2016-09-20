@@ -20,6 +20,16 @@ export default class LibraryGame extends React.Component {
     this.props.dispatch(openGameModal(game));
   }
 
+  addStyle(event) {
+    event.target.style.transform = 'translate(-2.5px, -2.5px)';
+    event.target.style.boxShadow = '7.5px 7.5px 5px';
+  }
+
+  removeStyle(event) {
+    event.target.style.transform = 'translate(2.5px, 2.5px)';
+    event.target.style.boxShadow = '5px 5px 2.5px';
+  }
+
   render() {
     const {library, filteredLibrary} = this.props;
     filteredLibrary.sort(function(a,b) {
@@ -55,8 +65,26 @@ export default class LibraryGame extends React.Component {
           const url = 'url(' + game.game_image + ')';
           {if (game.is_visible) {
             return (
-              <div key={index} className="col s4 m3 l2" style={{height:'350px',marginTop:'1%',marginBottom:'1%'}} onClick={this.openGameModal.bind(this, game)}>
-                <div className="card-image" style={{backgroundImage: url, backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'auto 100%', boxShadow: '5px 5px 2.5px'}}>
+              <div
+                key={index}
+                className="col s4 m3 l2"
+                style={{
+                  height:'350px',
+                  marginTop:'1%',
+                  marginBottom:'1%'
+                }}
+                onClick={this.openGameModal.bind(this, game)}>
+                <div
+                  className="card-image"
+                  onMouseEnter={this.addStyle.bind(this)}
+                  onMouseLeave={this.removeStyle.bind(this)}
+                  style={{
+                    backgroundImage: url,
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'auto 100%',
+                    boxShadow: '5px 5px 2.5px'
+                  }}>
                 </div>
               </div>
             )
