@@ -155,15 +155,26 @@ body {
 
 #control-bar {
   position: fixed;
-  bottom: 0;
   width:100%;
   z-index: 1;
+  margin:0;
   background-color: rgba(255,255,255,0.9);
+  bottom:0;
+}
+
+@keyframes raise {
+  0% {bottom:-160px}
+  100% {bottom:0}
+}
+
+@keyframes lower {
+  0% {bottom:0}
+  100% {bottom:-160px}
 }
 
 #add-game-button {
   position: absolute;
-  top:-15%;
+  top:-13%;
   right: .8%;
 }
 

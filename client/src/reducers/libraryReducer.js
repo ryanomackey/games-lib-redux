@@ -24,6 +24,7 @@ const initialState = {
   searchQuery: '',
   currentStream: {},
   showTwitchModal: false,
+  showControlBar: true,
 };
 
 export default function reducer(state=initialState, action) {
@@ -156,6 +157,13 @@ export default function reducer(state=initialState, action) {
     case "CLOSE_TWITCH_MODAL": {
       return Object.assign({}, state, {
         showTwitchModal: false,
+      });
+    }
+    case "TOGGLE_CONTROL_BAR": {
+      return Object.assign({}, state, {
+        showControlBar: state.showControlBar = !state.showControlBar,
+        platformDropdown: false,
+        platformArrow: 'arrow_drop_down',
       });
     }
     default: {

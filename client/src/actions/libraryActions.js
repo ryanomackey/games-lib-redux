@@ -172,3 +172,9 @@ export function closeTwitchModal() {
     dispatch({type:'CLOSE_TWITCH_MODAL'});
   };
 }
+
+export function toggleControlBar() {
+  return function(dispatch) {
+    dispatch({type:'TOGGLE_CONTROL_BAR'});
+  };
+}

@@ -9,6 +9,7 @@ import FilterBar from './FilterBar';
 import GameModal from './GameModal';
 import SteamModal from './SteamModal';
 import TwitchModal from './TwitchModal';
+import {toggleControlBar} from '../actions/libraryActions';
 
 @connect((store) => {
   return {
@@ -19,15 +20,29 @@ import TwitchModal from './TwitchModal';
 
 export default class Library extends React.Component {
 
+  toggleControlBar() {
+    this.props.dispatch(toggleControlBar());
+  }
+
   toggleGameSearch() {
     this.props.dispatch(toggleGameSearch());
   }
 
   render() {
-    const {user} = this.props;
+    const {user, library} = this.props;
     if (!user.login) {
       return null
     }else {
+      let controlBarAnimation = ''
+      let controlBarToggle = 'expand_more';
+      let controlBarView = 0;
+      if (library.showControlBar) {
+        controlBarToggle = 'expand_more';
+        controlBarAnimation = 'raise 0.5s linear forwards';
+      } else {
+        controlBarToggle = 'expand_less';
+        controlBarAnimation = 'lower 0.5s linear forwards';
+      }
       return (
         <main>
           <div className="container-fluid">
@@ -36,8 +51,8 @@ export default class Library extends React.Component {
                 <h1><strong>Library</strong></h1>
               </div>
             </div>
-            <div className="row z-depth-5" id="control-bar" style={{margin:'5% 0 0 0'}}>
-              <i className="material-icons medium teal-text">expand_more</i>
+            <div className="row z-depth-5" id="control-bar" style={{animation:controlBarAnimation}}>
+              <i className="material-icons medium teal-text" onClick={this.toggleControlBar.bind(this)}>{controlBarToggle}</i>
               <a onClick={this.toggleGameSearch.bind(this)} id="add-game-button"
                  className="btn-floating btn-large waves-effect waves-light">
                 <i className="material-icons">add</i>
