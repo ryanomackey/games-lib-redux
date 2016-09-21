@@ -52,16 +52,18 @@ export default class Library extends React.Component {
               </div>
             </div>
             <div className="row z-depth-5" id="control-bar" style={{animation:controlBarAnimation}}>
-              <i className="material-icons medium teal-text" onClick={this.toggleControlBar.bind(this)}>{controlBarToggle}</i>
+              <div style={{cursor:'pointer'}} onClick={this.toggleControlBar.bind(this)}>
+                <i className="material-icons medium teal-text">{controlBarToggle}</i>
+              </div>
               <a onClick={this.toggleGameSearch.bind(this)} id="add-game-button"
                  className="btn-floating btn-large waves-effect waves-light">
                 <i className="material-icons">add</i>
               </a>
               <AddGame />
-              <GameModal />
               <FilterBar />
             </div>
             <LibraryGame />
+            <GameModal />
             <SteamModal />
             <TwitchModal />
           </div>
