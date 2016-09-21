@@ -51,8 +51,8 @@ export function arrayToggle(array, platform) {
   }
 }
 
-export function filter(library, array) {
-  if (array.length > 0) {
+export function filter(library, array, showIncompleteOnly) {
+  if (array.length > 0 && !showIncompleteOnly) {
     library.map((game) => {
       game.is_visible = false;
     });
@@ -63,9 +63,28 @@ export function filter(library, array) {
         }
       }
     });
-  } else {
+  } else if (array.length > 0 && showIncompleteOnly) {
+    library.map((game) => {
+      game.is_visible = false;
+    });
+    library.map((game) => {
+      array.map((platform) => {
+        if (game.platform_name === platform && !game.completed) {
+          game.is_visible = true;
+        }
+      });
+    });
+  } else if (!array.length && !showIncompleteOnly) {
     library.map((game) => {
       game.is_visible = true;
+    });
+  } else if (!array.length && showIncompleteOnly){
+    library.map((game) => {
+      if (game.completed) {
+        game.is_visible = false;
+      } else {
+        game.is_visible = true;
+      }
     });
   }
   return library;

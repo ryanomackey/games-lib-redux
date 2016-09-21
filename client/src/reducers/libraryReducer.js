@@ -3,7 +3,7 @@
 import {filter} from '../library/helperFunctions';
 import {buildPlatformArray} from '../library/helperFunctions';
 import {arrayToggle} from '../library/helperFunctions';
-import {completedFilter} from '../library/helperFunctions';
+// import {completedFilter} from '../library/helperFunctions';
 import {selectedToggle} from '../library/helperFunctions';
 
 const initialState = {
@@ -19,9 +19,11 @@ const initialState = {
   gameModalShow: false,
   gameModalContent: {},
   streams: [],
-  showIncomplete: false,
+  showIncompleteOnly: false,
   deleteConfirm: false,
-  searchQuery: ''
+  searchQuery: '',
+  currentStream: {},
+  showTwitchModal: false,
 };
 
 export default function reducer(state=initialState, action) {
@@ -93,7 +95,7 @@ export default function reducer(state=initialState, action) {
     case "TOGGLE_PLATFORM": {
       return Object.assign({}, state, {
         platformArray: arrayToggle(state.platformArray, action.payload),
-        library: filter(state.library, state.platformArray),
+        library: filter(state.library, state.platformArray, state.showIncompleteOnly),
         platforms: selectedToggle(state.platforms, action.payload)
       });
     }
@@ -107,7 +109,8 @@ export default function reducer(state=initialState, action) {
       return Object.assign({}, state, {
         gameModalShow: state.gameModalShow = !state.gameModalShow,
         gameModalContent: {},
-        streams: {}
+        streams: {},
+        deleteConfirm: false,
       });
     }
     case "STREAM_FETCH_SUCCESS": {
@@ -116,18 +119,10 @@ export default function reducer(state=initialState, action) {
       });
     }
     case "TOGGLE_COMPLETED_FILTER": {
-      if (!state.showIncomplete) {
-        return Object.assign({}, state, {
-          library: completedFilter(state.library, 'HIDE_COMPLETE'),
-          showIncomplete: state.showIncomplete = !state.showIncomplete
-        });
-      } else {
-        return Object.assign({}, state, {
-          library: completedFilter(state.library, 'SHOW_COMPLETE'),
-          showIncomplete: state.showIncomplete = !state.showIncomplete
-        });
-      }
-      break;
+      return Object.assign({}, state, {
+        showIncompleteOnly: state.showIncompleteOnly = !state.showIncompleteOnly,
+        library: filter(state.library, state.platformArray, state.showIncompleteOnly)
+      });
     }
     case "REMOVE_TITLE_OPTIMISTIC": {
       const index = state.library.indexOf(action.payload);
@@ -150,6 +145,17 @@ export default function reducer(state=initialState, action) {
     case "UPDATE_SEARCH": {
       return Object.assign({}, state, {
         searchQuery: action.payload,
+      });
+    }
+    case "SET_CURRENT_STREAM": {
+      return Object.assign({}, state, {
+        currentStream: action.payload,
+        showTwitchModal: true,
+      });
+    }
+    case "CLOSE_TWITCH_MODAL": {
+      return Object.assign({}, state, {
+        showTwitchModal: false,
       });
     }
     default: {

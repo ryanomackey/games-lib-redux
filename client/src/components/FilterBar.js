@@ -34,8 +34,14 @@ export default class FilterBar extends React.Component {
 
   render() {
     const {library} = this.props;
+    let incompleteIcon = 'check_box_outline_blank';
+    if (library.showIncompleteOnly) {
+      incompleteIcon = 'check_box';
+    } else {
+      incompleteIcon = 'check_box_outline_blank';
+    }
     return (
-      <div>
+      <div id="filter-bar">
         <div className="row" style={{margin:'10px'}}>
           <LibrarySearch/>
         </div>
@@ -52,7 +58,7 @@ export default class FilterBar extends React.Component {
           </div>
           <div className="col s6 m6 l3">
             <a onClick={this.toggleCompletedFilter.bind(this)} className="btn btn-large btn-block">
-              <i className="material-icons right">done</i>Incomplete:
+              <i className="material-icons right">{incompleteIcon}</i>Incomplete:
             </a>
           </div>
           <div className="col s6 m6 l3">

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
+import {setCurrentStream} from '../actions/libraryActions';
 
 @connect((store) => {
   return {
@@ -10,6 +11,9 @@ import {connect} from 'react-redux';
 })
 
 export default class Stream extends React.Component {
+  setCurrentStream(stream) {
+    this.props.dispatch(setCurrentStream(stream));
+  }
   render() {
     const {library} = this.props;
     if (library.streams.length) {
@@ -27,6 +31,7 @@ export default class Stream extends React.Component {
                     scrolling="no"
                     allowFullScreen="true">
                 </iframe>
+                <a className="btn waves-effect waves-light purple" style={{width:'100%'}} onClick={this.setCurrentStream.bind(this, stream)}>Picture in Picture Mode</a>
               </div>
             )
           })}

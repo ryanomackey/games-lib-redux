@@ -106,6 +106,17 @@
   overflow: auto;
 }
 
+.twitch-modal {
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 5px;
+  top: 5px;
+  width: 360px;
+  height: 200px;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,1); /* Black w/ opacity */
+}
+
 .material-icons {
   cursor: pointer;
 }
@@ -144,17 +155,21 @@ body {
 
 #control-bar {
   position: fixed;
-  background-color: white;
   bottom: 0;
   width:100%;
   z-index: 1;
-  padding-top: 1.5%;
-  height:-3%;
+  background-color: rgba(255,255,255,0.9);
 }
 
 #add-game-button {
-  margin-bottom: 1%;
   position: absolute;
-  top:-17%;
+  top:-15%;
   right: .8%;
+}
+
+.twitch-close {
+  position: absolute;
+  top:5px;
+  right:5px;
+  color: white;
 }

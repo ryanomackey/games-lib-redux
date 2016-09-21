@@ -34,10 +34,11 @@ router.post('/', function(req, res) {
       });
     })
     .then(function() {
-      var userObj = {user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id, completed: false, own: false};
-      knex('user_games').where(userObj).then(function(result) {
+      var queryObj = {user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id};
+      var insertObj = {user_id:req.user.id, game_id:game.game_id, platform_id:game.platform_id, completed: false, own: false};
+      knex('user_games').where(queryObj).then(function(result) {
         if(!result.length) {
-          return knex('user_games').insert(userObj);
+          return knex('user_games').insert(insertObj);
         }
       });
     })

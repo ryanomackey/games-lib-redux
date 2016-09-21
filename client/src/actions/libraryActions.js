@@ -160,3 +160,15 @@ export function updateSearch(searchQuery) {
     dispatch({type:'UPDATE_SEARCH', payload: searchQuery});
   };
 }
+
+export function setCurrentStream(stream) {
+  return function(dispatch) {
+    dispatch({type:'SET_CURRENT_STREAM', payload: stream});
+  };
+}
+
+export function closeTwitchModal() {
+  return function(dispatch) {
+    dispatch({type:'CLOSE_TWITCH_MODAL'});
+  };
+}
