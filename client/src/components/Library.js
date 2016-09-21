@@ -35,7 +35,6 @@ export default class Library extends React.Component {
     }else {
       let controlBarAnimation = ''
       let controlBarToggle = 'expand_more';
-      let controlBarView = 0;
       if (library.showControlBar) {
         controlBarToggle = 'expand_more';
         controlBarAnimation = 'raise 0.5s linear forwards';

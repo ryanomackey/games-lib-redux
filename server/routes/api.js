@@ -40,7 +40,7 @@ router.get('/twitch', function(req, res) {
 
   var query = encodeURI(req.query.q);
 
-  var path = '/kraken/search/streams?q=' + query;
+  var path = '/kraken/search/streams?q=' + query +'&limit=4';
 
   var options = {
     hostname: 'api.twitch.tv',
