@@ -112,7 +112,7 @@
   left: 5px;
   top: 5px;
   width: 360px;
-  height: 200px;
+  height: 203px;
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,1); /* Black w/ opacity */
 }
@@ -150,7 +150,6 @@ iframe {
 
 body {
   position: relative;
-  padding-bottom: 170px;
 }
 
 #control-bar {
@@ -158,6 +157,7 @@ body {
   width:100%;
   z-index: 1;
   margin:0;
+  background-color: #FFFFFF;
   background-color: rgba(255,255,255,0.9);
   bottom:0;
 }
@@ -183,4 +183,9 @@ body {
   top:5px;
   right:5px;
   color: white;
+}
+
+.tech-stack {
+  display:inline-block;
+  margin-right:5%;
 }

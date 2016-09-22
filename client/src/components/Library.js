@@ -43,13 +43,8 @@ export default class Library extends React.Component {
         controlBarAnimation = 'lower 0.5s linear forwards';
       }
       return (
-        <main>
+        <main style={{paddingBottom:'200px'}}>
           <div className="container-fluid">
-            <div className="row">
-              <div className="col s12">
-                <h1><strong>Library</strong></h1>
-              </div>
-            </div>
             <div className="row z-depth-5" id="control-bar" style={{animation:controlBarAnimation}}>
               <div style={{cursor:'pointer'}} onClick={this.toggleControlBar.bind(this)}>
                 <i className="material-icons medium teal-text">{controlBarToggle}</i>

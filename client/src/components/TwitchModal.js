@@ -23,7 +23,7 @@ export default class TwitchModal extends React.Component {
           <div className="col s12 m12 l6" style={{marginBottom:'1%'}}>
             <iframe
                 src={src}
-                height="200px"
+                height="203px"
                 width="360px"
                 frameBorder="0"
                 scrolling="no"

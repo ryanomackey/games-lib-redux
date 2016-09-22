@@ -93,27 +93,27 @@ export default class CreateAccountForm extends React.Component {
       <form className="col s10 push-s1" onSubmit={this.handleSubmit.bind(this)}>
         <div className="row">
           <div className="col s12">
-            <h3>Create an acccount:</h3>
+            <h3>Create an account</h3>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12">
             <input type="email" ref="email" onBlur={() => this.validateEmail()}/>
-            <label>Email:</label>
+            <label>Email</label>
             <p className="red-text right">{email.message}</p>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12">
             <input type="password" ref="password" onBlur={() => this.validatePassword()}/>
-            <label>Password:</label>
+            <label>Password</label>
             <p className="red-text right">{password.message}</p>
           </div>
         </div>
         <div className="row">
           <div className="input-field col s12">
             <input type="password" ref="rePassword" onChange={() => this.matchPasswords()}/>
-            <label>Re-type password:</label>
+            <label>Re-type password</label>
             <p className="red-text right">{rePassword.message}</p>
           </div>
         </div>

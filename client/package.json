@@ -1,11 +1,11 @@
 {
-  "name": "babel-with-gulp",
+  "name": "games.lib",
   "version": "1.0.0",
-  "description": "Starter code for using Babel with Gulp",
-  "main": "index.js",
+  "description": "",
+  "main": "client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp watch"
+    "dev": "gulp watch",
+    "start": "gulp serve"
   },
   "author": "",
   "license": "ISC",
