@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { login } from '../actions/userActions';
 import { toggleCreateAccount} from '../actions/userActions';
 import CreateAccount from './CreateAccount';
-import Footer from  './Footer';
 
 @connect((store) => {
   return {
@@ -71,7 +70,6 @@ export default class Login extends React.Component {
             </div>
             <CreateAccount />
           </div>
-          <Footer/>
         </div>
       )
     } else {

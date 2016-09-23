@@ -20,12 +20,18 @@ export default class Navbar extends React.Component {
   }
   render() {
     const {user} = this.props;
+    let library;
     let logout;
-     if (user.login) {
-       logout = <li><a href='#' onClick={this.logout.bind(this)}>Logout</a></li>
-     } else {
-       logout = null;
-     }
+    let wishlist;
+    if (user.login) {
+      library = <li><a href="#/">Library</a></li>
+      logout = <li><a href='#' onClick={this.logout.bind(this)}>Logout</a></li>
+      wishlist = <li><a href="#/wishlist">Wishlist</a></li>
+    } else {
+      library = null;
+      logout = null;
+      wishlist = null;
+    }
     return (
       <div>
         <div className="navbar z-depth-4">
@@ -33,7 +39,8 @@ export default class Navbar extends React.Component {
             <div className="nav-wrapper blue-grey darken-4">
               <a href="#" className="brand-logo center">games.lib</a>
               <ul className="right">
-                <li><a href="#/">Home</a></li>
+                {library}
+                {wishlist}
                 <li><a href="#/about">About</a></li>
                 {logout}
               </ul>

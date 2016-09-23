@@ -45,23 +45,23 @@ export default class FilterBar extends React.Component {
         <div className="row" style={{margin:'10px'}}>
           <LibrarySearch/>
         </div>
-        <div className="row" style={{marginBottom:'0'}}>
-          <div className="col s3 m3 l3" style={{marginBottom:'1%'}}>
+        <div className="row" style={{marginBottom:'1%'}}>
+          <div className="col s3">
             <a onClick={this.toggleLibraryOrder.bind(this)} className="btn btn-large btn-block">
               <i className="material-icons right">sort_by_alpha</i>Title:
             </a>
           </div>
-          <div className="col s3 m3 l3" style={{marginBottom:'1%'}}>
+          <div className="col s3">
             <a onClick={this.toggleReleaseOrder.bind(this)} className="btn btn-large btn-block">
               <i className="material-icons right">history</i>Release:
             </a>
           </div>
-          <div className="col s3 m3 l3">
+          <div className="col s3">
             <a onClick={this.toggleCompletedFilter.bind(this)} className="btn btn-large btn-block">
               <i className="material-icons right">{incompleteIcon}</i>Incomplete:
             </a>
           </div>
-          <div className="col s3 m3 l3">
+          <div className="col s3">
             <a onClick={this.togglePlatformDropdown.bind(this)} className="btn btn-large btn-block">
               <i className="material-icons right">{library.platformArrow}</i>Platform:
             </a>

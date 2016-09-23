@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "apac": "^2.0.2",
     "bcrypt": "^0.8.7",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
@@ -23,6 +24,7 @@
     "passport-openidconnect": "0.0.1",
     "passport-steam": "^1.0.5",
     "pg": "^6.1.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "xml2js": "^0.4.17"
   }
 }

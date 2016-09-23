@@ -158,3 +158,13 @@ export function filterDuplicates(arr) {
     return arr.indexOf(x) === i;
   });
 }
+
+export function buildWishlist(library) {
+  const wishlist = []
+  library.map((game) => {
+    if (!game.own) {
+      wishlist.push(game);
+    }
+  });
+  return wishlist;
+}

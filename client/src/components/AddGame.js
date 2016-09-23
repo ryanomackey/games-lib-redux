@@ -32,7 +32,7 @@ export default class AddGame extends React.Component {
         <div className="add-game-modal" id="modal" onClick={this.toggleGameSearchAlt.bind(this)}>
           <div className="add-game-modal-content">
             <div style={{marginBottom:'5%'}}>
-              <h4 style={{display:'inline'}}>Search titles to add to library</h4>
+              <h4 style={{display:'inline'}}><strong>Search titles to add to library</strong></h4>
               <i className="material-icons small"
                  style={{float:'right'}}
                  onClick={this.toggleGameSearch.bind(this)}

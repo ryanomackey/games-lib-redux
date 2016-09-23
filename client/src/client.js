@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import {Router, Route, hashHistory} from 'react-router';
 import Layout from './components/Layout';
 import About from './components/About';
+import Wishlist from './components/Wishlist';
 import store from './store';
 
 const app =  document.getElementById('app');
@@ -15,5 +16,6 @@ ReactDOM.render(
     <Router history={hashHistory}>
       <Route path="/" component={Layout}/>
       <Route path="/about" component={About}/>
+      <Route path="/wishlist" component={Wishlist}/>
     </Router>
   </Provider>, app);

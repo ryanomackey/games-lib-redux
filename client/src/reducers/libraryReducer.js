@@ -3,7 +3,7 @@
 import {filter} from '../library/helperFunctions';
 import {buildPlatformArray} from '../library/helperFunctions';
 import {arrayToggle} from '../library/helperFunctions';
-// import {completedFilter} from '../library/helperFunctions';
+import {buildWishlist} from '../library/helperFunctions';
 import {selectedToggle} from '../library/helperFunctions';
 
 const initialState = {
@@ -25,6 +25,7 @@ const initialState = {
   currentStream: {},
   showTwitchModal: false,
   showControlBar: true,
+  wishlist: [],
 };
 
 export default function reducer(state=initialState, action) {
@@ -52,14 +53,15 @@ export default function reducer(state=initialState, action) {
     }
     case "LIBRARY_FETCH_SUCCESS": {
       return Object.assign({}, state, {
-        library: filter(action.payload, state.platformArray),
-        platforms: buildPlatformArray(action.payload)
+        library: filter(action.payload, state.platformArray, state.showIncompleteOnly),
+        platforms: buildPlatformArray(action.payload),
+        wishlist: buildWishlist(action.payload),
       });
     }
     case "LIBRARY_OPTIMISTIC": {
       return Object.assign({}, state, {
         showGameSearch: false,
-        library: filter([...state.library, action.payload], state.platformArray, state.showIncompleteOnly),
+        library: filter([...state.library, action.payload], state.platformArray, state.showIncompleteOnly)
       });
     }
     case "LOGOUT": {
@@ -135,7 +137,7 @@ export default function reducer(state=initialState, action) {
         library: [
           ...state.library.slice(0, index),
           ...state.library.slice(index + 1)
-        ]
+        ],
       });
     }
     case "TOGGLE_DELETE_CONFIRM": {
