@@ -3,7 +3,6 @@
 import {filter} from '../library/helperFunctions';
 import {buildPlatformArray} from '../library/helperFunctions';
 import {arrayToggle} from '../library/helperFunctions';
-import {buildWishlist} from '../library/helperFunctions';
 import {selectedToggle} from '../library/helperFunctions';
 
 const initialState = {
@@ -25,7 +24,6 @@ const initialState = {
   currentStream: {},
   showTwitchModal: false,
   showControlBar: true,
-  wishlist: [],
 };
 
 export default function reducer(state=initialState, action) {
@@ -55,7 +53,6 @@ export default function reducer(state=initialState, action) {
       return Object.assign({}, state, {
         library: filter(action.payload, state.platformArray, state.showIncompleteOnly),
         platforms: buildPlatformArray(action.payload),
-        wishlist: buildWishlist(action.payload),
       });
     }
     case "LIBRARY_OPTIMISTIC": {

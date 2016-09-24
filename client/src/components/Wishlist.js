@@ -3,8 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Navbar from './Navbar';
-import {fetchWishlist} from '../actions/wishlistActions';
-import {getLibrary} from '../actions/libraryActions';
+import {getWishlist} from '../actions/wishlistActions';
 import WishlistItem from './WishlistItem';
 
 @connect((store) => {
@@ -15,11 +14,9 @@ import WishlistItem from './WishlistItem';
 
 export default class Wishlist extends React.Component{
   componentWillMount() {
-    this.props.dispatch(getLibrary());
+    this.props.dispatch(getWishlist());
   }
   render() {
-    const {library} = this.props;
-    const wishlist = library.wishlist;
     return (
       <div>
         <Navbar/>
