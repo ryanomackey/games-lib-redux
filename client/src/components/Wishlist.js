@@ -9,7 +9,7 @@ import WishlistItem from './WishlistItem';
 @connect((store) => {
   return {
     library: store.library,
-  }
+  };
 })
 
 export default class Wishlist extends React.Component{

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {getWishlist} from '../actions/wishlistActions';
 
 @connect((store) => {
   return {
@@ -23,11 +22,11 @@ export default class WishlistItem extends React.Component {
           <div className="col s3">
             <p><strong>Title</strong></p>
           </div>
-          <div className="col s3 right-align">
-            <p><strong>Amazon</strong></p>
+          <div className="col s3">
+            <p><strong>Platform</strong></p>
           </div>
           <div className="col s3 right-align">
-            <p><strong>Steam</strong></p>
+            <p><strong>Amazon</strong></p>
           </div>
         </div>
         {wishlist.wishlist.map((game) => {
@@ -48,12 +47,13 @@ export default class WishlistItem extends React.Component {
               <div className="col s3">
                 <p>{game.game_name}</p>
               </div>
-              <div className="col s3 right-align">
-                <p>{game.amazon_price}</p>
+              <div className="col s3">
+                <p>{game.platform_name}</p>
               </div>
               <div className="col s3 right-align">
-                <p>$cash.money</p>
+                <p><a href={game.amazon_url} target="_blank">{game.amazon_price || 'unavailable'}</a></p>
               </div>
+              <hr/>
             </div>
           )
         })}

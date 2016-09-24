@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var OperationHelper = require('apac').OperationHelper;
 var parseString = require('xml2js').parseString;
-// var querystring = require('querystring');
 var knex = require('../db/knex');
 
 var opHelper = new OperationHelper({
@@ -35,9 +34,16 @@ router.get('/amazon', function(req,res) {
       var resultsData = [];
       for (var i = 0; i < data2.length; i++) {
         parseString(data2[i], function(err, result) {
+          var url = result.ItemSearchResponse.Items[0].Item[0].DetailPageURL[0];
+          var price;
+          if (result.ItemSearchResponse.Items[0].Item[0].Offers[0].Offer) {
+            price = result.ItemSearchResponse.Items[0].Item[0].Offers[0].Offer[0].OfferListing[0].Price[0].FormattedPrice[0];
+          } else {
+            price = null;
+          }
           resultsData.push({
-            itemURL: result.ItemSearchResponse.Items[0].Item[0].DetailPageURL[0],
-            price: result.ItemSearchResponse.Items[0].Item[0].Offers[0].Offer[0].OfferListing[0].Price[0].FormattedPrice[0]
+            itemURL: url,
+            price: price
           });
         });
       }
@@ -46,9 +52,14 @@ router.get('/amazon', function(req,res) {
         data[j].amazon_price = resultsData[j].price;
       }
       res.json(data);
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.json({error:err});
     });
   })
   .catch(function(err) {
+    console.log(err);
     res.json({error: err});
   });
 });
