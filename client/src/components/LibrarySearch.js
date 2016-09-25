@@ -11,6 +11,9 @@ import {updateSearch} from '../actions/libraryActions';
 })
 
 export default class LibrarySearch extends React.Component {
+  handleSubmit(event) {
+    event.preventDefault();
+  }
   updateSearch(event) {
     event.preventDefault();
     this.props.dispatch(updateSearch(event.target.value.toLowerCase()));
@@ -20,7 +23,7 @@ export default class LibrarySearch extends React.Component {
     return(
       <nav className="teal">
         <div className="nav-wrapper">
-          <form>
+          <form onSubmit={this.handleSubmit.bind(this)}>
             <div className="input-field">
               <input type="search" onChange={this.updateSearch.bind(this)} value={library.searchQuery}/>
               <label><i className="material-icons">search</i></label>

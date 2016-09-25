@@ -17,10 +17,6 @@ export function toggleGameSearch() {
 
 export function giantBombSearch(searchQuery) {
   bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken}
-  });
   return function(dispatch) {
     dispatch({type: 'SEARCH_START'});
     instance.get('api/search?query=' + searchQuery)
@@ -136,11 +132,6 @@ export function toggleCompletedFilter() {
 
 export function removeTitle(game) {
   bearerToken = sessionStorage.getItem('token');
-  const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-    headers: {'Authorization': 'Bearer ' + bearerToken},
-    data: game,
-  });
   return function(dispatch) {
     dispatch({type:'REMOVE_TITLE_OPTIMISTIC', payload: game});
     instance.delete('/games')
