@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "preinstall": "npm i -g node-gyp && node-gyp clean",
     "postinstall": "node_modules/.bin/knex migrate:latest",
     "start": "node ./bin/www"
   },
   "dependencies": {
     "apac": "^2.0.2",
-    "bcrypt": "^0.8.7",
+    "bcryptjs": "^2.3.0",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "cookie-session": "^2.0.0-alpha.1",
