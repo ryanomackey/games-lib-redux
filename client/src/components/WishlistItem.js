@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 @connect((store) => {
   return {
     wishlist: store.wishlist,
-  }
+  };
 })
 
 export default class WishlistItem extends React.Component {
