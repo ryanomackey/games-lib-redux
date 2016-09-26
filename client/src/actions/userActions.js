@@ -2,10 +2,18 @@
 
 import axios from 'axios';
 
+const bearerToken = sessionStorage.getItem('token');
+
+const instance = axios.create({
+  baseURL: 'https://games-lib-dev.us-west-2.elasticbeanstalk.com',
+  headers: {'Authorization': 'Bearer ' + bearerToken}
+});
+
+
 export function login(email, password) {
   return function(dispatch) {
     dispatch({type: 'LOGIN_INIT'});
-    axios.post('http://localhost:3000/authenticate/login', {
+    instance.post('/authenticate/login', {
       email: email,
       password: password
     })
@@ -27,7 +35,7 @@ export function login(email, password) {
 export function logout() {
   return function(dispatch) {
     sessionStorage.removeItem('token');
-    axios.post('http://localhost:3000/authenticate/logout');
+    instance.post('/authenticate/logout');
     dispatch({type: 'LOGOUT'});
   };
 }
@@ -41,7 +49,7 @@ export function toggleCreateAccount() {
 export function createAccount(data) {
   return function(dispatch) {
     dispatch({type:'CREATE_ACCOUNT_INIT'});
-    axios.post('http://localhost:3000/authenticate/signup', data)
+    instance.post('/authenticate/signup', data)
     .then(function(response) {
       if (response.data.message === 'Email already exists.') {
         dispatch({type: 'CREATE_ACCOUNT_DUPLICATE', payload: response.data.message});
@@ -57,7 +65,7 @@ export function createAccount(data) {
 
 function fetchLibrary(token, dispatch) {
   const instance = axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'https://games-lib-dev.us-west-2.elasticbeanstalk.com',
     headers: {'Authorization': 'Bearer ' + token}
   });
   instance.get('/games')

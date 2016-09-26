@@ -17,7 +17,7 @@ export default class SteamImport extends React.Component {
     if (!library.searching && !library.searchResults.length) {
       return (
         <div className="row center" style={{marginTop:'5%'}}>
-          <a className="btn waves-effect waves-light" href="http://localhost:3000/steam">
+          <a className="btn waves-effect waves-light" href="https://games-lib-dev.us-west-2.elasticbeanstalk.com/steam">
             <i className="fa fa-steam-square fa-5x right" aria-hidden="true"></i>
             Import Steam Library
           </a>

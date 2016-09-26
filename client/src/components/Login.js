@@ -52,7 +52,7 @@ export default class Login extends React.Component {
                 </div>
                 <div className="row">
                   <div className="col s12 right-align">
-                    <button className="btn waves-effect waves-light" type="submit">Log in</button>
+                    <input className="btn waves-effect waves-light" type="submit" value="Log in" onClick={this.login.bind(this)}/>
                   </div>
                 </div>
                 <div className="row">

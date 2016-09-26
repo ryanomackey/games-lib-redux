@@ -16,8 +16,8 @@ passport.deserializeUser(function(obj, done) {
 router.use(passport.initialize());
 
 passport.use(new SteamStrategy({
-    returnURL: 'http://localhost:3000/steam/return',
-    realm: 'http://localhost:3000',
+    returnURL: 'https://games-lib-dev.us-west-2.elasticbeanstalk.com/steam/return',
+    realm: 'https://games-lib-dev.us-west-2.elasticbeanstalk.com',
     apiKey: process.env.STEAM
   },
   function(identifier, profile, done) {
@@ -28,11 +28,11 @@ passport.use(new SteamStrategy({
 router.get('/', passport.authenticate('steam'));
 
 router.get('/return',
-  passport.authenticate('steam', { failureRedirect: 'http://localhost:8000' }),
+  passport.authenticate('steam', { failureRedirect: 'https://games-lib.firebaseapp.com' }),
   function(req, res) {
     // Successful authentication, redirect home.
     var steamId = req.session.passport.user.id;
-    res.redirect('http://localhost:8000/#/' + '?steamImport=true&steamId=' + steamId);
+    res.redirect('https://games-lib.firebaseapp.com/#/' + '?steamImport=true&steamId=' + steamId);
   });
 
 module.exports = router;

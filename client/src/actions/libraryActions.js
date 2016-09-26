@@ -5,7 +5,7 @@ import axios from 'axios';
 let bearerToken = sessionStorage.getItem('token');
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://games-lib-dev.us-west-2.elasticbeanstalk.com',
   headers: {'Authorization': 'Bearer ' + bearerToken}
 });
 

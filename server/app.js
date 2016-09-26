@@ -1,5 +1,8 @@
 'use strict';
 
+var knex = require('./db/knex');
+knex.migrate.latest();
+
 require('dotenv').config();
 var express = require('express');
 var path = require('path');
@@ -36,6 +39,10 @@ app.use('/games', expressJwt({secret:process.env.SECRET}), games);
 app.use('/steam', steam);
 app.use('/steamImport', expressJwt({secret:process.env.SECRET}), steamImport);
 app.use('/wishlist', expressJwt({secret:process.env.SECRET}), wishlist);
+
+app.get('/', function(req,res) {
+  res.json({message:'Hello World'});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

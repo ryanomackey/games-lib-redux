@@ -3,3 +3,4 @@ npm-debug.log
 public/assets/js
 public/bower_components
 .DS_Store
+.env
